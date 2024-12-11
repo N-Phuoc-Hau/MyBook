@@ -36,4 +36,4 @@ private val settingViewModel: SettingViewModel by viewModels()
  Order. Order sẽ hiện ra bên trong RecyclerView của người dùng về ngày tháng năm và số lượng sách.
  Cũng sẽ hiện ra tất cả các Order trong StatificalFragment.
 
- 7. Trong CategoryUser khi bấm vào bất kỳ Item nào sẽ gọi ra các Book thuộc category đó.
+ 7. Trong CategoryUser khi bấm vào bất kỳ Item nào sẽ gọi ra các Book thuộc category đó. (done)

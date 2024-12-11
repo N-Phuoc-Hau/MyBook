@@ -57,5 +57,6 @@ class BookDetailFragment: BaseFragment<BookDetailFragmentBinding>() {
                         .commit()
             }
         }
+
     }
 }

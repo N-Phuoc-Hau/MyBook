@@ -1,4 +1,41 @@
 package com.haunp.mybookstore.presenters.fragment.user.category_user
 
-class CategoryUserAdapter {
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.haunp.mybookstore.databinding.ItemCategoryBinding
+import com.haunp.mybookstore.domain.entity.CategoryEntity
+
+class CategoryUserAdapter() : RecyclerView.Adapter<CategoryUserAdapter.CategoryUserViewHolder>() {
+    var onItemClick : (CategoryEntity) -> Unit = {}
+    private val categories = mutableListOf<CategoryEntity>()
+
+    fun submitList(list: List<CategoryEntity>) {
+        categories.clear()
+        categories.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    inner class CategoryUserViewHolder(private val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(category: CategoryEntity) {
+            binding.apply {
+                // Bind dữ liệu category
+                tvCategoryName.text = category.name
+                root.setOnClickListener {
+                    onItemClick(category)
+                }
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryUserViewHolder {
+        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CategoryUserViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: CategoryUserViewHolder, position: Int) {
+        holder.bind(categories[position])
+    }
+
+    override fun getItemCount() = categories.size
 }

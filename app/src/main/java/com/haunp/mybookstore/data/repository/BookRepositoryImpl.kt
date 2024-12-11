@@ -21,4 +21,8 @@ class BookRepositoryImpl(private var bookDao: BookDao) : IBookRepository {
     override suspend fun updateBook(bookEntity: BookEntity) {
         return bookDao.updateBook(bookEntity)
     }
+
+    override fun getBookByCategoryID(categoryId: Int): Flow<List<BookEntity>> {
+        return bookDao.getBooksByCategory(categoryId)
+    }
 }

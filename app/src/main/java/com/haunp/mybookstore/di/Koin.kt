@@ -16,6 +16,7 @@ import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddCateUseCase
 import com.haunp.mybookstore.domain.usecase.DeleteCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetAccountUseCase
+import com.haunp.mybookstore.domain.usecase.GetBookByCateIDUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
 import com.haunp.mybookstore.domain.usecase.LoginUseCase
@@ -54,7 +55,7 @@ var viewModelModule = module {
     viewModel { UserViewModel(get(),get()) }
     viewModel { CategoryAdminViewModel(get(),get(),get()) }
     viewModel { StatisticalViewModel() }
-    viewModel { CategoryUserViewModel(get()) }
+    viewModel { CategoryUserViewModel(get(),get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { SettingViewModel() }
@@ -71,6 +72,7 @@ var useCaseModule = module {
     factory { GetCateUseCase(get()) }
     factory { GetAccountUseCase(get()) }
     factory { DeleteCateUseCase(get()) }
+    factory { GetBookByCateIDUseCase(get()) }
 }
 
 var repositoryModule = module {

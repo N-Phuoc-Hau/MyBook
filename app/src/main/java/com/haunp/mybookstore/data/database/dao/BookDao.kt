@@ -25,7 +25,7 @@ interface BookDao {
     suspend fun searchBooks(keyword: String): List<BookEntity>
 
     @Query("SELECT * FROM books WHERE categoryId = :categoryId")
-    suspend fun getBooksByCategory(categoryId: Int): List<BookEntity>
+    fun getBooksByCategory(categoryId: Int): Flow<List<BookEntity>>
 
     // Loại bỏ suspend và để Room tự động chuyển đổi thành LiveData
     @Query("SELECT * FROM books")

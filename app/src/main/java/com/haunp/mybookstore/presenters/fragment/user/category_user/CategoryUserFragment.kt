@@ -2,14 +2,18 @@ package com.haunp.mybookstore.presenters.fragment.user.category_user
 
 import android.content.Context
 import android.util.Log
+import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.haunp.mybookstore.R
+import com.haunp.mybookstore.R.id.fragment_container
 import com.haunp.mybookstore.databinding.CategoryUserFragmentBinding
 import com.haunp.mybookstore.domain.entity.CategoryEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.admin.category_admin.CategoryAdapter
+import com.haunp.mybookstore.presenters.fragment.user.CategoryDetailFragment
 import org.koin.android.ext.android.inject
 
 class CategoryUserFragment : BaseFragment<CategoryUserFragmentBinding>() {
@@ -20,15 +24,29 @@ class CategoryUserFragment : BaseFragment<CategoryUserFragmentBinding>() {
         return CategoryUserFragmentBinding.inflate(layoutInflater)
     }
 
+    var adapter = CategoryUserAdapter()
     override fun initView() {
-        val adapter = CategoryAdapter()
         binding.categoryRecyclerView.adapter = adapter
         binding.categoryRecyclerView.layoutManager = GridLayoutManager(context,2)
 
         // Lắng nghe LiveData và cập nhật RecyclerView
         val categoryList = getCategoriesFromSharedPreferences()
-        Log.e("hau.np", "initView: $categoryList")
         adapter.submitList(categoryList)
+    }
+
+    override fun initAction() {
+        val categoryDetailFragment = CategoryDetailFragment()
+        adapter.onItemClick = { category ->
+            val bundle = Bundle().apply{
+                putInt("categoryId",category.categoryId)
+                Log.d("hau,np", "initAction: ${category.categoryId}")
+            }
+            categoryDetailFragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(fragment_container, categoryDetailFragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun getCategoriesFromSharedPreferences(): List<CategoryEntity> {

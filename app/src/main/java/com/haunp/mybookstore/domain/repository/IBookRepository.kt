@@ -9,4 +9,5 @@ interface IBookRepository {
     suspend fun addBook(bookEntity: BookEntity)
     suspend fun deleteBook(id: Int)
     suspend fun updateBook(bookEntity: BookEntity)
+    fun getBookByCategoryID(categoryId: Int): Flow<List<BookEntity>>
 }
