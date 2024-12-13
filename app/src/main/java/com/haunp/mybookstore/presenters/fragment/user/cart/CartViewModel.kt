@@ -23,17 +23,11 @@ class CartViewModel(
     private val _bookInCart = MutableLiveData<List<BookEntity>>()
     val bookInCart: MutableLiveData<List<BookEntity>> get() = _bookInCart
 
-    //    fun addBookToCart(userId: Int, bookId: Int) {
-//        cartRepo.addBookToCart(userId, bookId)
-////        val cart = cartRepo.getCartByUserId(userId)
-////        _cart.value = cart
-//    }
     fun addBookToCart(userId: Int, bookId: Int) {
-//        updateCartUseCase.invoke(userId,bookId)
         viewModelScope.launch {
             updateCartUseCase.invoke(userId, bookId)
-            val listBook = getBookInCartUserCase.invoke(userId)
-            _bookInCart.value = listBook
+//            val listBook = getBookInCartUserCase.invoke(userId)
+//            _bookInCart.value = listBook
         }
     }
 
