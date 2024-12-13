@@ -1,6 +1,6 @@
 package com.haunp.mybookstore.presenters.fragment.user.cart
 
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,27 +9,28 @@ import com.haunp.mybookstore.databinding.ItemCartBinding
 import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.domain.entity.CartEntity
 
-class CartAdapter() : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-    var onItemClicked: (CartEntity) -> Unit = {}
+class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private val cartItems = mutableListOf<BookEntity>()
 
-    fun submitList(newCartItems: List<BookEntity>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(newCart: List<BookEntity>) {
         cartItems.clear()
-        cartItems.addAll(newCartItems)
-        Log.d("hau.np", "submitList: ${cartItems.size} items added")
+        cartItems.addAll(newCart)
         notifyDataSetChanged()
     }
 
     inner class CartViewHolder(private val binding: ItemCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(cartItem: BookEntity) {
+        fun bind(list: List<BookEntity>) {
             binding.apply {
-                Glide.with(itemView.context)
-                    .load(cartItem.imageUri)
-                    .into(imgIcon)
-                tvTitle.text = cartItem.title
-                tvPrice.text = cartItem.price.toString()
-                tvQuantity.text = cartItem.quantity.toString()
+                list.forEach { book ->
+                    Glide.with(itemView.context)
+                        .load(book.imageUri)
+                        .into(imgIcon)
+                    tvTitle.text = book.title
+                    tvPrice.text = book.price.toString()
+                    tvQuantity.text = book.quantity.toString()
+                }
             }
         }
     }
@@ -40,8 +41,10 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(cartItems[position])
+        val cart = cartItems
+        holder.bind(cart)
     }
+
 
     override fun getItemCount(): Int = cartItems.size
 }

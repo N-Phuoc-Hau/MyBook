@@ -6,22 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.haunp.mybookstore.databinding.FragmentLoginBinding
 import com.haunp.mybookstore.domain.entity.UserEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
+import com.haunp.mybookstore.presenters.CoreViewModel
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.admin.book.BookFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
 import com.haunp.mybookstore.presenters.fragment.register.RegisterFragment
-import com.haunp.mybookstore.presenters.fragment.user.setting.SettingViewModel
+import com.haunp.mybookstore.presenters.fragment.user.cart.CartViewModel
 import org.koin.android.ext.android.inject
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override var isTerminalBackKeyActive: Boolean = false
 
     private val viewModel: LoginViewModel by inject()
-    private var settingViewModel: SettingViewModel? = null
+    private val coreViewModel : CoreViewModel by activityViewModels()
 
     override fun getDataBinding(): FragmentLoginBinding {
         return FragmentLoginBinding.inflate(layoutInflater)
@@ -32,7 +34,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        settingViewModel = ViewModelProvider(requireActivity())[SettingViewModel::class.java]
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -41,10 +42,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             if (it != null) {
                 Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
                 (activity as MainActivity).showFragment(BookFragment())
-                settingViewModel?.setUser(it)
-                BookStoreManager.idUser = it.userId
+                coreViewModel.setUser(it)
+            }
+            else {
+                Toast.makeText(context, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show()
             }
         }
+
+    }
+
+    override fun initAction() {
         binding {
             btnLogin.setOnClickListener {
                 val username = edtUsername.text.toString()
@@ -55,7 +62,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 }
                 else if(username == "admin" && password == "admin"){
                     (activity as MainActivity).showFragment(BookFragment())
-                    settingViewModel?.setUser(UserEntity(99, password,"admin","admin","admin", "admin",0))
+                    coreViewModel.setUser(UserEntity(99, password,"admin","admin","admin", "admin",0))
                 }
                 viewModel.login(username, password)
             }

@@ -6,13 +6,4 @@ import androidx.lifecycle.ViewModel
 import com.haunp.mybookstore.domain.entity.UserEntity
 
 class SettingViewModel : ViewModel() {
-    private val _user = MutableLiveData<UserEntity?>()
-    val user: LiveData<UserEntity?> = _user
-
-    fun setUser(user: UserEntity){
-        _user.value = user
-    }
-    fun logout(){
-        _user.value = null
-    }
 }

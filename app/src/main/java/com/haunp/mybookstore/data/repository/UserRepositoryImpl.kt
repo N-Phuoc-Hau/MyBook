@@ -18,7 +18,7 @@ class UserRepositoryImpl(private val userDao: UserDao,private val cartDao: CartD
     }
 
     override suspend fun loginUser(userName: String, password: String): UserEntity {
-        return userDao.login(userName, password) ?: UserEntity()
+        return userDao.login(userName, password)
     }
 
 //    override suspend fun addBookInCart(cartEntity: CartEntity) {

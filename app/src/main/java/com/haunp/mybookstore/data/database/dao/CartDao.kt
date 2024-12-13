@@ -5,25 +5,25 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.haunp.mybookstore.domain.entity.CartEntity
 
 @Dao
 interface CartDao {
     // Thêm giỏ hàng mới hoặc cập nhật nếu đã tồn tại
-    @Insert
-    fun addBookToCart(cart: CartEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun createCart(cart: CartEntity)
 
     @Query("SELECT * FROM carts WHERE userid = :userId")
-    fun getCartByUserId(userId: Int): List<CartEntity>
+    suspend fun getCartByUserId(userId: Int): CartEntity?
 
     @Delete
-    suspend fun removeBookFromCart(cart: CartEntity)
+    fun removeCart(cart: CartEntity)
 
-    @Query("DELETE FROM carts WHERE userid = :userId")
-    suspend fun clearCart(userId: Int)
+    @Update
+    fun updateCart(cart: CartEntity)
 
-    // Thêm phương thức để xóa cart item khi quantity = 0
-    @Query("DELETE FROM carts WHERE cartId = :cartId")
-    suspend fun deleteCartItemById(cartId: Int)
+//    @Query("SELECT bookId FROM carts WHERE userid = :userId")
+//    fun getBookInCartByUser(userId: Int): Flow<List<Int>>
 
 }

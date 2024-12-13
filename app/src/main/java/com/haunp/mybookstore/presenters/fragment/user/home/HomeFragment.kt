@@ -14,7 +14,10 @@ import com.google.gson.reflect.TypeToken
 import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.HomeFragmentBinding
 import com.haunp.mybookstore.domain.entity.BookEntity
+import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
+import com.haunp.mybookstore.presenters.fragment.login.LoginFragment
+import com.haunp.mybookstore.presenters.fragment.main.MainActivity
 import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
 import org.koin.android.ext.android.inject
 
@@ -63,19 +66,24 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
         // Khởi động banner slideshow
         bannerImageView = binding.bannerImageView
         handler.post(slideshowRunnable)
+
     }
 
     override fun initAction() {
         adapter.onItemClick = { book ->
-            val bookDetailFragment = BookDetailFragment()
-            val bundle = Bundle().apply {
-                putParcelable("book", book)
+            if (BookStoreManager.idUser == null)
+                (activity as MainActivity).showFragment(LoginFragment())
+            else{
+                val bookDetailFragment = BookDetailFragment()
+                val bundle = Bundle().apply {
+                    putParcelable("book", book)
+                }
+                bookDetailFragment.arguments = bundle
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, bookDetailFragment)
+                    .addToBackStack(null)
+                    .commit()
             }
-            bookDetailFragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, bookDetailFragment)
-                .addToBackStack(null)
-                .commit()
         }
     }
 

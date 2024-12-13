@@ -25,4 +25,9 @@ class BookRepositoryImpl(private var bookDao: BookDao) : IBookRepository {
     override fun getBookByCategoryID(categoryId: Int): Flow<List<BookEntity>> {
         return bookDao.getBooksByCategory(categoryId)
     }
+
+    override fun getBookById(id: Int): BookEntity {
+        return bookDao.getBookById(id)
+    }
+
 }

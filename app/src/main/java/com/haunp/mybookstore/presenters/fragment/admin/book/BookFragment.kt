@@ -18,7 +18,6 @@ import com.google.gson.Gson
 import com.haunp.mybookstore.databinding.BookFragmentBinding
 import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
-import com.haunp.mybookstore.presenters.fragment.user.setting.SettingViewModel
 import org.koin.android.ext.android.inject
 import java.util.Locale
 

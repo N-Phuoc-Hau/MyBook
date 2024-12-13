@@ -1,5 +1,5 @@
 package com.haunp.mybookstore.presenters
 
 object BookStoreManager {
-    var idUser: Int = -1
+    var idUser: Int? = null
 }

@@ -14,9 +14,12 @@ import com.haunp.mybookstore.domain.repository.IOrderRepository
 import com.haunp.mybookstore.domain.repository.IUserRepository
 import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddCateUseCase
+import com.haunp.mybookstore.domain.usecase.UpdateCartUseCase
 import com.haunp.mybookstore.domain.usecase.DeleteCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetAccountUseCase
 import com.haunp.mybookstore.domain.usecase.GetBookByCateIDUseCase
+import com.haunp.mybookstore.domain.usecase.GetBookInCartUserCase
+import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
 import com.haunp.mybookstore.domain.usecase.LoginUseCase
@@ -59,7 +62,7 @@ var viewModelModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { SettingViewModel() }
-    viewModel { CartViewModel() }
+    viewModel { CartViewModel(get(),get(),get(),get()) }
 }
 
 
@@ -73,13 +76,16 @@ var useCaseModule = module {
     factory { GetAccountUseCase(get()) }
     factory { DeleteCateUseCase(get()) }
     factory { GetBookByCateIDUseCase(get()) }
+    factory { UpdateCartUseCase(get()) }
+    factory { GetCartByUserIdUseCase(get()) }
+    factory { GetBookInCartUserCase(get()) }
 }
 
 var repositoryModule = module {
     single<IUserRepository> { UserRepositoryImpl(get(),get()) }
     single<IBookRepository>{ BookRepositoryImpl(get()) }
     single<ICategoryRepository>{ CategoryRepositoryImpl(get()) }
-    single<ICartRepository> { CartRepositoryImpl(get()) }
+    single<ICartRepository> { CartRepositoryImpl(get(),get()) }
     single<IOrderRepository> { OrderRepositoryImpl(get()) }
 }
 

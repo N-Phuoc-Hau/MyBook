@@ -9,14 +9,17 @@ import com.haunp.mybookstore.domain.entity.UserEntity
 import com.haunp.mybookstore.domain.usecase.LoginUseCase
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
+class LoginViewModel(
+    private val loginUseCase: LoginUseCase,
+) : ViewModel() {
 
-    private val _loginResult = MutableLiveData<UserEntity>()
-    val loginResult: LiveData<UserEntity> get() = _loginResult
+    private val _loginResult = MutableLiveData<UserEntity?>()
+    val loginResult: LiveData<UserEntity?> get() = _loginResult
 
-    fun login(username: String, password: String){
+    fun login(username: String, password: String) {
         viewModelScope.launch {
             val user = loginUseCase.invoke(username, password)
+            Log.d("hau.np", "User: $user")
             _loginResult.value = user
         }
     }
