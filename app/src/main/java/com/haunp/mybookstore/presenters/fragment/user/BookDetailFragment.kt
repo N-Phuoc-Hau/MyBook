@@ -45,7 +45,6 @@ class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
             btnAddToCart.setOnClickListener {
                 lifecycleScope.launch {
                     viewModel.addBookToCart(BookStoreManager.idUser!!, book!!.bookId)
-                    Log.d("hau.np", "initAction: ${BookStoreManager.idUser},${book!!.bookId}")
                 }
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, CartFragment())

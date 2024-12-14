@@ -40,7 +40,6 @@ class CartRepositoryImpl(private val cartDao: CartDao, private val bookDao: Book
     override suspend fun addBookToCart(userId: Int, bookId: Int) {
         withContext(Dispatchers.IO) {
             val cart = cartDao.getCartByUserId(userId)
-            Log.d("hau.np", "addBookToCart: $cart")
             if (cart != null) {
                 val bookIds = cart.bookId.let { Converters().toBookIdList(it) } ?: emptyList()
                 if (bookId in bookIds) {

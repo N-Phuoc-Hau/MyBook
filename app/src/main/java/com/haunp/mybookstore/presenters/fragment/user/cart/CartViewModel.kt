@@ -26,8 +26,8 @@ class CartViewModel(
     fun addBookToCart(userId: Int, bookId: Int) {
         viewModelScope.launch {
             updateCartUseCase.invoke(userId, bookId)
-//            val listBook = getBookInCartUserCase.invoke(userId)
-//            _bookInCart.value = listBook
+            val listBook = getBookInCartUserCase.invoke(userId)
+            _bookInCart.value = listBook
         }
     }
 

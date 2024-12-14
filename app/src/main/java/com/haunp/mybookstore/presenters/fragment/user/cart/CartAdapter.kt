@@ -12,33 +12,33 @@ import com.haunp.mybookstore.databinding.ItemCartBinding
 import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.domain.entity.CartEntity
 
-class CartAdapter : ListAdapter<BookEntity, CartAdapter.CartViewHolder>(BookDiffCallback()) {
+class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+    private val books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val binding = ItemCartBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return CartViewHolder(binding)
+    fun submitList(newBooks: List<BookEntity>) {
+        books.clear()
+        books.addAll(newBooks)
+        notifyDataSetChanged()
     }
-
-    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val book = getItem(position) // Sử dụng getItem để lấy dữ liệu từ danh sách
-        holder.bind(book)
-    }
-
-    override fun getItemCount(): Int = currentList.size // Sử dụng currentList của ListAdapter
 
     inner class CartViewHolder(private val binding: ItemCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(book: BookEntity) {
-            Log.d("hau.np", "bind: $book")
-            binding.tvTitle.text = book.title
-            binding.tvPrice.text = book.price.toString()
-            Glide.with(binding.root.context)
-                .load(book.imageUri)
-                .into(binding.imgIcon)
-        }
+            fun bind(book: BookEntity) {
+                binding.tvTitle.text = book.title
+                binding.tvPrice.text = book.price.toString()
+                Glide.with(binding.root.context)
+                    .load(book.imageUri)
+                    .into(binding.imgIcon)
+            }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        val binding = ItemCartBinding.inflate(
+            LayoutInflater.from(parent.context), parent,false)
+        return CartViewHolder(binding)
+    }
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+        holder.bind(books[position])
+    }
+    override fun getItemCount(): Int = books.size
 }
