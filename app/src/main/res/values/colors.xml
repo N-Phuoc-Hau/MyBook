@@ -17,4 +17,5 @@
     <color name="amber">#FFFFC107</color>
     <color name="indigo">#FF3F51B5</color>
     <color name="red_100">#F23E58</color>
+    <color name="background_app">#0C3CD0</color>
 </resources>
