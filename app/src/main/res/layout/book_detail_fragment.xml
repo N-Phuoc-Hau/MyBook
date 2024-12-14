@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#3F51B5"
+        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
         <ImageView
@@ -22,12 +22,16 @@
             android:id="@+id/nameBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:text="HỆ THỐNG BÀI TẬP CÂU HỎI TRẮC NGHIỆM MÔN NGUYÊN LÝ KẾ TOÁN"/>
         <TextView
             android:id="@+id/priceBook"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text="24.000đ"/>
         <TextView
             android:background="@color/grey"
             android:layout_width="match_parent"
@@ -36,18 +40,56 @@
             android:id="@+id/authorBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Tác giả: Nguyễn Văn A"/>
         <TextView
             android:id="@+id/descriptionBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/grey"
+            android:text="Cuốn giáo trình Hệ Thống Bài Tập Câu Hỏi Trắc Nghiệm Nguyên Lý Kế Toán này được biên soạn để giúp các bạn sinh viên nắm vững phần lý thuyết đã được học và rèn luyện kỹ năng thực hành.">
+        </TextView>
+<!--            android:text="Cuốn giáo trình Hệ Thống Bài Tập Câu Hỏi Trắc Nghiệm Nguyên Lý Kế Toán này được biên soạn để giúp các bạn sinh viên nắm vững phần lý thuyết đã được học và rèn luyện kỹ năng thực hành.Các bài tập được soạn theo chương trình môn học Nguyên lý Kế toán được giảng dạy ở hầu hết các trường đại học. Sau mỗi chương đã học, sinh viên phải thực hành các bài tập để củng cố kiến thức được cung cấp. Ngoài ra, các  bài tập tình huống được biên soạn có tính tổng hợp nhiều sự kiện và giao dịch phát sinh trong hoạt động của doanh nghiệp để người học phân tích và giải quyết một số yêu cầu có tính chuyên sâu nhằm tăng cường năng lực tư duy khi học tập và nghiên cứu môn học nguyên lý kế toán.Cuốn sách này cũng có một số câu hỏi trắc nghiệm để sinh viên tự đánh giá tình hình và kết quả tiếp thu nội dung môn học Nguyên lý Kế toán."/>-->
+        <TextView
+            android:id="@+id/phuongthuc_thanhtoan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textStyle="bold"
+            android:text="THÔNG TIN KHUYẾN MÃI"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:textStyle="bold"
+            android:text="Thanh toán linh hoạt với:"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="276dp"
+            android:layout_height="102dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/zalopay" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="275dp"
+            android:layout_height="118dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/visa" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/red_100"
         android:text="Thêm vào giỏ hàng"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

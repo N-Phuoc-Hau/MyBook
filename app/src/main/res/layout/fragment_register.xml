@@ -8,13 +8,13 @@
         android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
         android:layout_marginTop="30dp"
-        android:textColor="@color/white"
-        android:background="@color/orange"
+        android:background="@color/background_app"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Đăng ký" />
+        android:text="Đăng ký"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/edt_username"

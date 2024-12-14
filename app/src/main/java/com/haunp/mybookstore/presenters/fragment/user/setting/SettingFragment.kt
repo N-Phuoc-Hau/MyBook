@@ -27,18 +27,18 @@ class SettingFragment : BaseFragment<SettingFragmentBinding>() {
         if (BookStoreManager.idUser != null) {
             binding.btnLogin.visibility = View.GONE
             binding.btnLogout.visibility = View.VISIBLE
-            binding.rvOrder.visibility = View.VISIBLE
+            binding.rVOrder.visibility = View.VISIBLE
         } else {
             binding.btnLogin.visibility = View.VISIBLE
             binding.textView3.text = "Tài khoản"
             binding.btnLogout.visibility = View.GONE
-            binding.rvOrder.visibility = View.GONE
+            binding.rVOrder.visibility = View.GONE
         }
         if (BookStoreManager.idUser != null) {
             lifecycleScope.launch {
                 val adapter = OrderAdapter()
-                binding.rvOrder.adapter = adapter
-                binding.rvOrder.layoutManager = LinearLayoutManager(context)
+                binding.rVOrder.adapter = adapter
+                binding.rVOrder.layoutManager = LinearLayoutManager(context)
                 viewModel.getOrder(BookStoreManager.idUser!!)
                 viewModel.orders.observe(viewLifecycleOwner) { orders->
                     Log.d("hau.np","initView: $orders")

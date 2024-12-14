@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:gravity="center"
-            android:background="@color/orange"
+            android:background="@color/background_app"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:text="Tài khoản"
@@ -67,16 +67,32 @@
                 android:backgroundTint="@color/white"
                 android:text="Thoát"
                 android:textColor="@color/black"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvOrder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_marginTop="30dp"
-            android:text="" />
+            android:id="@+id/rV_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:visibility="gone"
+            tools:text="Long" />
 
     </LinearLayout>
 

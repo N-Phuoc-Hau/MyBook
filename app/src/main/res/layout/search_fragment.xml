@@ -19,6 +19,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="30dp"
             android:padding="8dp"
+            android:background="@color/background_app"
             android:gravity="center_vertical">
 
             <EditText
@@ -27,6 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Nhập từ khoá tìm kiếm"
+                android:background="@color/white"
+                android:textColor="@color/white"
                 android:padding="8dp"/>
 
             <Button
@@ -34,7 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tìm"
-                android:backgroundTint="@color/orange"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="@color/red_100"
                 android:padding="8dp" />
         </LinearLayout>
 

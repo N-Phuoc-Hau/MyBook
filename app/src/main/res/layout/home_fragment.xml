@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
              android:layout_height="match_parent">
     <!-- res/layout/fragment_home.xml -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
         android:layout_height="match_parent"
@@ -14,14 +16,25 @@
 
 
         <!-- Banner -->
-        <ImageView
-            android:id="@+id/bannerImageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="Banner" />
 
         <!-- Chính sách khách hàng -->
+
+        <ImageView
+            android:id="@+id/bannerImageView"
+            android:layout_width="365dp"
+            android:layout_height="167dp"
+            android:layout_gravity="center"
+            android:contentDescription="Banner"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:text="CHÍNH SÁCH KHÁCH HÀNG TẠI NEWSHOP" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +43,7 @@
 
             <!-- Các item trong chính sách khách hàng -->
             <!-- Ví dụ: Free Shipping -->
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -46,7 +60,67 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Free Shipping"
+                    android:text="Free Shipping trên 250.000đ"
+                    android:textSize="12sp"
+                    android:gravity="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_hang_chinh_hang"
+                    android:contentDescription="Sản phẩm chính hãng" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sản phẩm chính hãng"
+                    android:textSize="12sp"
+                    android:gravity="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_thanh_toan_hang"
+                    android:contentDescription="Nhận hàng rồi thanh toán" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nhận hàng rồi thanh toán"
+                    android:textSize="12sp"
+                    android:gravity="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_doi_tra"
+                    android:contentDescription="Đổi trả dễ dàng trong 7 ngày" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đổi trả dễ dàng trong 7 ngày"
                     android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
