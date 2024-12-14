@@ -8,4 +8,13 @@ class OrderRepositoryImpl(private val orderDao: OrderDao): IOrderRepository {
     override suspend fun insertOrder(order: OrderEntity) {
         return orderDao.insertOrder(order)
     }
+    override suspend fun getAllOrderForAdmin():List<OrderEntity>{
+        if(orderDao.getAllOrders().isEmpty()){
+            return emptyList()
+        }
+        return orderDao.getAllOrders()
+    }
+    override suspend fun getOrdersByUserId(userId: Int): List<OrderEntity> {
+        return orderDao.getOrdersByUserId(userId)
+    }
 }

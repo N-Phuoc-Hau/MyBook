@@ -13,5 +13,5 @@ interface ICartRepository {
     fun removeCart(cart:CartEntity)
     suspend fun addBookToCart(userId: Int, bookId: Int)
     suspend fun getBookInCartByUser(userId: Int): List<BookEntity>
-
+    suspend fun clearCart(userId: Int)
 }

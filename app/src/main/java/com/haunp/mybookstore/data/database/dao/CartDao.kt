@@ -20,6 +20,9 @@ interface CartDao {
     @Delete
     fun removeCart(cart: CartEntity)
 
+    @Query("DELETE FROM carts WHERE userid = :userId")
+    suspend fun clearCart(userId: Int)
+
     @Update
     fun updateCart(cart: CartEntity)
 

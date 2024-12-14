@@ -1,17 +1,22 @@
 package com.haunp.mybookstore.presenters.fragment.user.setting
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.databinding.SettingFragmentBinding
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.CoreViewModel
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.login.LoginFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class SettingFragment : BaseFragment<SettingFragmentBinding>() {
-    //shareViewModel
     private val coreViewModel: CoreViewModel by activityViewModels()
+    private val viewModel: SettingViewModel by inject()
     override var isTerminalBackKeyActive: Boolean = true
 
     override fun getDataBinding(): SettingFragmentBinding {
@@ -19,10 +24,8 @@ class SettingFragment : BaseFragment<SettingFragmentBinding>() {
     }
 
     override fun initView() {
-//        coreViewModel.user.observe(viewLifecycleOwner) { user ->
         if (BookStoreManager.idUser != null) {
             binding.btnLogin.visibility = View.GONE
-//                binding.textView3.text = user?.username
             binding.btnLogout.visibility = View.VISIBLE
             binding.rvOrder.visibility = View.VISIBLE
         } else {
@@ -31,7 +34,21 @@ class SettingFragment : BaseFragment<SettingFragmentBinding>() {
             binding.btnLogout.visibility = View.GONE
             binding.rvOrder.visibility = View.GONE
         }
-//        }
+        if (BookStoreManager.idUser != null) {
+            lifecycleScope.launch {
+                val adapter = OrderAdapter()
+                binding.rvOrder.adapter = adapter
+                binding.rvOrder.layoutManager = LinearLayoutManager(context)
+                viewModel.getOrder(BookStoreManager.idUser!!)
+                viewModel.orders.observe(viewLifecycleOwner) { orders->
+                    Log.d("hau.np","initView: $orders")
+                    adapter.submitList(orders)
+                }
+            }
+        }
+    }
+
+    override fun initAction() {
         binding {
             btnLogin.setOnClickListener {
                 (activity as MainActivity).showFragment(LoginFragment())

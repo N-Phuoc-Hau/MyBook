@@ -71,4 +71,7 @@ class CartRepositoryImpl(private val cartDao: CartDao, private val bookDao: Book
             bookDao.getBooksByIds(bookIds) // Truy vấn danh sách BookEntity từ bookDao dữ liệu truyển vào là List<Int>
         }
     }
+    override suspend fun clearCart(userId: Int) {
+        cartDao.clearCart(userId)
+    }
 }

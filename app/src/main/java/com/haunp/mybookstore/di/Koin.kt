@@ -14,6 +14,7 @@ import com.haunp.mybookstore.domain.repository.IOrderRepository
 import com.haunp.mybookstore.domain.repository.IUserRepository
 import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddCateUseCase
+import com.haunp.mybookstore.domain.usecase.AddOrderUseCase
 import com.haunp.mybookstore.domain.usecase.UpdateCartUseCase
 import com.haunp.mybookstore.domain.usecase.DeleteCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetAccountUseCase
@@ -22,6 +23,7 @@ import com.haunp.mybookstore.domain.usecase.GetBookInCartUserCase
 import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
+import com.haunp.mybookstore.domain.usecase.GetOrderByUserUseCase
 import com.haunp.mybookstore.domain.usecase.LoginUseCase
 import com.haunp.mybookstore.domain.usecase.RegisterUseCase
 import com.haunp.mybookstore.presenters.fragment.admin.book.BookViewModel
@@ -61,7 +63,7 @@ var viewModelModule = module {
     viewModel { CategoryUserViewModel(get(),get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { SearchViewModel(get()) }
-    viewModel { SettingViewModel() }
+    viewModel { SettingViewModel(get(),get()) }
     viewModel { CartViewModel(get(),get(),get(),get()) }
 }
 
@@ -79,6 +81,8 @@ var useCaseModule = module {
     factory { UpdateCartUseCase(get()) }
     factory { GetCartByUserIdUseCase(get()) }
     factory { GetBookInCartUserCase(get()) }
+    factory { AddOrderUseCase(get()) }
+    factory { GetOrderByUserUseCase(get())}
 }
 
 var repositoryModule = module {
