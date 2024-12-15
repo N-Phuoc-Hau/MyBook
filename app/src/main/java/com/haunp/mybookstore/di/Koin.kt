@@ -15,23 +15,31 @@ import com.haunp.mybookstore.domain.repository.IUserRepository
 import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddCateUseCase
 import com.haunp.mybookstore.domain.usecase.AddOrderUseCase
+import com.haunp.mybookstore.domain.usecase.DelBookUseCase
+import com.haunp.mybookstore.domain.usecase.DelCateUseCase
+import com.haunp.mybookstore.domain.usecase.DelUserUseCase
 import com.haunp.mybookstore.domain.usecase.UpdateCartUseCase
-import com.haunp.mybookstore.domain.usecase.DeleteCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetAccountUseCase
+import com.haunp.mybookstore.domain.usecase.GetAllOrderUseCase
 import com.haunp.mybookstore.domain.usecase.GetBookByCateIDUseCase
 import com.haunp.mybookstore.domain.usecase.GetBookInCartUserCase
 import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
 import com.haunp.mybookstore.domain.usecase.GetOrderByUserUseCase
+import com.haunp.mybookstore.domain.usecase.GetOrderDetailUseCase
 import com.haunp.mybookstore.domain.usecase.LoginUseCase
 import com.haunp.mybookstore.domain.usecase.RegisterUseCase
+import com.haunp.mybookstore.domain.usecase.UpdateBookUseCase
+import com.haunp.mybookstore.domain.usecase.UpdateCateUseCase
+import com.haunp.mybookstore.domain.usecase.UpdateUserUseCase
 import com.haunp.mybookstore.presenters.fragment.admin.book.BookViewModel
 import com.haunp.mybookstore.presenters.fragment.admin.category_admin.CategoryAdminViewModel
 import com.haunp.mybookstore.presenters.fragment.admin.statistical.StatisticalViewModel
 import com.haunp.mybookstore.presenters.fragment.admin.user.UserViewModel
 import com.haunp.mybookstore.presenters.fragment.login.LoginViewModel
 import com.haunp.mybookstore.presenters.fragment.register.RegisterViewModel
+import com.haunp.mybookstore.presenters.fragment.user.OrderDetailViewModel
 import com.haunp.mybookstore.presenters.fragment.user.cart.CartViewModel
 import com.haunp.mybookstore.presenters.fragment.user.category_user.CategoryUserViewModel
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeViewModel
@@ -56,15 +64,17 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
 var viewModelModule = module {
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
-    viewModel { BookViewModel(get(),get()) }
-    viewModel { UserViewModel(get(),get()) }
-    viewModel { CategoryAdminViewModel(get(),get(),get()) }
-    viewModel { StatisticalViewModel() }
+    viewModel { BookViewModel(get(),get(),get(),get()) }
+    viewModel { UserViewModel(get(),get(),get(),get()) }
+    viewModel { CategoryAdminViewModel(get(),get(),get(),get())  }
+    viewModel { StatisticalViewModel(get(),get()) }
     viewModel { CategoryUserViewModel(get(),get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { SettingViewModel(get(),get()) }
     viewModel { CartViewModel(get(),get(),get(),get()) }
+    viewModel { OrderDetailViewModel(get())}
+
 }
 
 
@@ -76,13 +86,20 @@ var useCaseModule = module {
     factory { GetListBookUseCase(get()) }
     factory { GetCateUseCase(get()) }
     factory { GetAccountUseCase(get()) }
-    factory { DeleteCateUseCase(get()) }
+    factory { DelCateUseCase(get()) }
+    factory { UpdateCateUseCase(get()) }
+    factory { DelBookUseCase(get()) }
+    factory { UpdateBookUseCase(get()) }
+    factory { UpdateUserUseCase(get())}
+    factory { DelUserUseCase(get()) }
     factory { GetBookByCateIDUseCase(get()) }
     factory { UpdateCartUseCase(get()) }
     factory { GetCartByUserIdUseCase(get()) }
     factory { GetBookInCartUserCase(get()) }
     factory { AddOrderUseCase(get()) }
     factory { GetOrderByUserUseCase(get())}
+    factory { GetAllOrderUseCase(get()) }
+    factory { GetOrderDetailUseCase(get()) }
 }
 
 var repositoryModule = module {

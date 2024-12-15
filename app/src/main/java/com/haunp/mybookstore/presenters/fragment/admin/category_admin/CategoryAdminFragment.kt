@@ -26,13 +26,15 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
     override fun initView() {
         val adapter = CategoryAdapter()
         binding.categoryAdminRecyclerView.adapter = adapter
-        binding.categoryAdminRecyclerView.layoutManager = GridLayoutManager(context,2)
+        binding.categoryAdminRecyclerView.layoutManager = GridLayoutManager(context, 2)
 
         // Lắng nghe LiveData và cập nhật RecyclerView
         viewModel.categories.observe(viewLifecycleOwner) { categoryList ->
             adapter.submitList(categoryList)
             saveCategoriesToSharedPreferences(categoryList)
         }
+    }
+    override fun initAction() {
         binding{
             btnSelectImage.setOnClickListener {
                 val intent = Intent(Intent.ACTION_PICK).apply { type = "image/*" }
@@ -44,11 +46,54 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
                 if (name.isNotEmpty()) {
                     val categoryEntity = CategoryEntity(name = name, imageUri = imageUriString)
                     viewModel.addCategory(categoryEntity)
-                    edtNameCate.text.clear() // Xóa dữ liệu sau khi thêm
+                    clearText()
+                    Toast.makeText(context, "Thêm danh mục thành công!", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Vui lòng nhập tên danh mục!", Toast.LENGTH_SHORT).show()
                 }
             }
+            btnDel.setOnClickListener {
+                val id = edtIDCate.text.toString().trim()
+                if (id.isBlank()) {
+                    Toast.makeText(context, "Vui lòng nhập ID danh mục", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val categoryId = id.toInt()
+                val categories = viewModel.categories.value ?: emptyList()
+                for (cate in categories) {
+                    if (cate.categoryId == id.toInt()) {
+                        viewModel.deleteCategory(id.toInt())
+                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show()
+                        clearText()
+                        return@setOnClickListener
+                    }
+                }
+                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
+                clearText()
+            }
+            btnUpdate.setOnClickListener {
+                val id = edtIDCate.text.toString().trim()
+                val name = edtNameCate.text.toString().trim()
+                val imageUriString = selectedImageUri?.toString() ?: ""
+                if (id.isBlank() || name.isBlank()) {
+                    Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val categoryId = id.toInt()
+                val categoryEntity = CategoryEntity(categoryId = categoryId, name = name, imageUri = imageUriString)
+                val categories = viewModel.categories.value ?: emptyList()
+                for (cate in categories) {
+                    if (cate.categoryId == id.toInt()) {
+                        viewModel.updateCategory(categoryEntity)
+                        Toast.makeText(context, "Update thành công", Toast.LENGTH_SHORT).show()
+                        clearText()
+                        return@setOnClickListener
+                    }
+                }
+                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
+                clearText()
+            }
+
         }
     }
     private val imagePickerLauncher = registerForActivityResult(
@@ -70,5 +115,13 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
         // Lưu JSON vào SharedPreferences
         editor.putString("cate_list", json)
         editor.apply()
+    }
+    private fun clearText(){
+        binding{
+            edtIDCate.setText("")
+            edtNameCate.setText("")
+            selectedImageUri = null
+        }
+
     }
 }

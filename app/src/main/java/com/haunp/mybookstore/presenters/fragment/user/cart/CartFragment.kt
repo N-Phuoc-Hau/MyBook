@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.databinding.CartFragmentBinding
+import com.haunp.mybookstore.domain.entity.OrderDetailEntity
 import com.haunp.mybookstore.domain.entity.OrderEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
@@ -54,8 +55,17 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                 return@launch
             }
             val totalAmount = books.sumOf { it.price }
-            val order = OrderEntity(userId = userId!!, orderDate = LocalDate.now().toString(), quantity = books.size, totalAmount = totalAmount)
-            orderViewModel.insertOrder(order,userId)
+            val tmp = OrderEntity(userId = userId!!, orderDate = LocalDate.now().toString(), quantity = books.size, totalAmount = totalAmount)
+            val order = orderViewModel.insertOrder(tmp,userId)
+
+            val orderDetails = books.map { book ->
+                OrderDetailEntity(
+                    orderId = order.toInt(), // ID của đơn hàng
+                    bookId = book.bookId,      // ID của sách
+                    quantity = 1,             // Số lượng mặc định là 1
+                    price = book.price        // Giá sách
+                )
+            }
             Toast.makeText(context, "Đặt hàng thành công", Toast.LENGTH_SHORT).show()
             viewModel.clearCart(userId)
             (activity as MainActivity).showFragment(SettingFragment())

@@ -28,9 +28,9 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
 
     // Danh sách hình ảnh cho banner
     private val imageList = listOf(
-        R.drawable.anh1, // Thay bằng tên ảnh trong drawable
-        R.drawable.bookapplogo,
-        R.drawable.mybook
+        R.drawable.matbiec, // Thay bằng tên ảnh trong drawable
+        R.drawable.cogaidentuhomqua,
+        R.drawable.lambanvoibautroi
     )
     private var currentIndex = 0
     private val handler = Handler(Looper.getMainLooper())

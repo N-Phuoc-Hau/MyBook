@@ -26,8 +26,5 @@ class BookRepositoryImpl(private var bookDao: BookDao) : IBookRepository {
         return bookDao.getBooksByCategory(categoryId)
     }
 
-    override fun getBookById(id: Int): BookEntity {
-        return bookDao.getBookById(id)
-    }
 
 }

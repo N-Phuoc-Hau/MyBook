@@ -68,12 +68,60 @@ class BookFragment : BaseFragment<BookFragmentBinding>() {
                 )
 
                 viewModel.addBook(bookEntity)
-                edtIdBook.setText("")
-                edtTitle.setText("")
-                edtAuthor.setText("")
-                edtPrice.setText("")
-                edtQuantity.setText("")
-                edtCategory.setText("")
+                clearText()
+            }
+            btnDel.setOnClickListener {
+                val id = edtIdBook.text.toString()
+                if (id.isBlank()) {
+                    Toast.makeText(context, "Vui lòng nhập ID sách", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val books = viewModel.books.value ?: emptyList()
+                for (book in books) {
+                    if (book.bookId == id.toInt()) {
+                        viewModel.deleteBook(book.bookId)
+                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show()
+                        clearText()
+                        return@setOnClickListener
+                    }
+                }
+                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
+            }
+            btnUpdate.setOnClickListener {
+                val id = edtIdBook.text.toString()
+                val title = edtTitle.text.toString()
+                val author = edtAuthor.text.toString()
+                val price = edtPrice.text.toString()
+                val quantity = edtQuantity.text.toString()
+                val category = edtCategory.text.toString()
+                val description = edtDescription.text.toString()
+                val imageUriString = selectedImageUri?.toString() ?: ""
+                if (title.isBlank() || author.isBlank() || price.isBlank() || quantity.isBlank() || category.isBlank()) {
+                    Toast.makeText(context, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val bookEntity = BookEntity(
+                    bookId = id.toInt(),
+                    title = title,
+                    author = author,
+                    price = price.toDouble(),
+                    quantity = quantity.toInt(),
+                    categoryId = category.toInt(), // Cần làm hàm check có tồn tại không
+                    description = description,
+                    imageUri = imageUriString
+                )
+
+                val books = viewModel.books.value ?: emptyList()
+                for (book in books) {
+                    if (book.bookId == id.toInt()) {
+                        viewModel.updateBook(bookEntity)
+                        Toast.makeText(context, "Update thành công", Toast.LENGTH_SHORT).show()
+                        clearText()
+                        return@setOnClickListener
+                    }
+                }
+                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
+                clearText()
             }
         }
     }
@@ -95,6 +143,18 @@ class BookFragment : BaseFragment<BookFragmentBinding>() {
         // Lưu JSON vào SharedPreferences
         editor.putString("book_list", json)
         editor.apply()
+    }
+
+    private fun clearText(){
+        binding{
+            edtIdBook.setText("")
+            edtTitle.setText("")
+            edtAuthor.setText("")
+            edtDescription.setText("")
+            edtPrice.setText("")
+            edtQuantity.setText("")
+            edtCategory.setText("")
+        }
     }
 
 }

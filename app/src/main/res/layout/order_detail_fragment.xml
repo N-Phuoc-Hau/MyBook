@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edt_search"
-        android:hint="Tìm kiếm"
+        android:id="@+id/orderId"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_order"
+        android:id="@+id/rv_order_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="68dp"

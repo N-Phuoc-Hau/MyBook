@@ -21,11 +21,11 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class OrderItem(
+data class OrderDetailEntity(
     @PrimaryKey(autoGenerate = true)
     val orderItemId: Int = 0,
     val orderId: Int,
-    val bookId: Long,  // Thay vì lưu bookId dưới dạng String, dùng Long
+    val bookId: Int,
     val quantity: Int,
     val price: Double
 )

@@ -22,12 +22,12 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
         <EditText
-            android:id="@+id/edt_IDCate"
+            android:id="@+id/edtIDCate"
             android:hint="Nhập ID danh mục"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/edt_NameCate"
+            android:id="@+id/edtNameCate"
             android:hint="Nhập tên danh mục"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -88,12 +88,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/ftbAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            app:elevation="0dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

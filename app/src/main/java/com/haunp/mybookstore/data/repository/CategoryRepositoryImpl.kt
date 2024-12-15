@@ -22,4 +22,5 @@ class CategoryRepositoryImpl(private var categoryDao: CategoryDao): ICategoryRep
     override suspend fun updateCategory(categoryEntity: CategoryEntity) {
         return categoryDao.updateCategory(categoryEntity)
     }
+
 }

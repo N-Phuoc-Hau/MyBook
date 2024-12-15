@@ -8,12 +8,17 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.haunp.mybookstore.domain.entity.CategoryEntity
 import com.haunp.mybookstore.domain.usecase.AddCateUseCase
-import com.haunp.mybookstore.domain.usecase.DeleteCateUseCase
+import com.haunp.mybookstore.domain.usecase.DelCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
+import com.haunp.mybookstore.domain.usecase.UpdateCateUseCase
 
 import kotlinx.coroutines.launch
 
-class CategoryAdminViewModel(private var getCateUseCase : GetCateUseCase, private var addCateUseCase : AddCateUseCase,private var deleteCateUseCase : DeleteCateUseCase) : ViewModel() {
+class CategoryAdminViewModel(private val getCateUseCase : GetCateUseCase,
+                             private val addCateUseCase : AddCateUseCase,
+                             private val deleteCateUseCase : DelCateUseCase,
+                            private val updateCateUseCase : UpdateCateUseCase
+) : ViewModel() {
 
     val categories : LiveData<List<CategoryEntity>> = liveData {
         emitSource(getCateUseCase().asLiveData())
@@ -24,9 +29,15 @@ class CategoryAdminViewModel(private var getCateUseCase : GetCateUseCase, privat
             addCateUseCase.invoke(categoryEntity)
         }
     }
-    suspend fun deleteCategory(categoryId: Int) {
+    fun deleteCategory(categoryId: Int) {
         viewModelScope.launch {
             deleteCateUseCase.invoke(categoryId)
         }
+    }
+    fun updateCategory(categoryEntity: CategoryEntity) {
+        viewModelScope.launch {
+            updateCateUseCase.invoke(categoryEntity)
+        }
+
     }
 }
