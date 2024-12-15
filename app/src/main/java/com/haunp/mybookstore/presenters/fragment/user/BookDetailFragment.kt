@@ -13,6 +13,8 @@ import com.haunp.mybookstore.presenters.fragment.user.cart.CartViewModel
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeAdapter
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
@@ -30,7 +32,9 @@ class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
             book = arguments?.getParcelable("book")
             book?.let {
                 nameBook.text = it.title
-                priceBook.text = it.price.toString()
+                val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                    .format(it.price)
+                priceBook.text = "$formattedPrice đ"
                 authorBook.text = it.author
                 descriptionBook.text = it.description
                 Glide.with(requireContext())

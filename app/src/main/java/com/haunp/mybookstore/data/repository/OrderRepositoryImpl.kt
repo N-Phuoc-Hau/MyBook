@@ -5,7 +5,7 @@ import com.haunp.mybookstore.domain.entity.OrderEntity
 import com.haunp.mybookstore.domain.repository.IOrderRepository
 
 class OrderRepositoryImpl(private val orderDao: OrderDao): IOrderRepository {
-    override suspend fun insertOrder(order: OrderEntity) {
+    override suspend fun insertOrder(order: OrderEntity):Long {
         return orderDao.insertOrder(order)
     }
     override suspend fun getAllOrderForAdmin():List<OrderEntity>{

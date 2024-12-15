@@ -8,143 +8,157 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
         android:layout_height="match_parent"
-        android:theme="@style/Base.Theme.MyBookStore"
-        android:orientation="vertical"
-        tools:context=".HomeFragment">
-
-
-        <!-- Banner -->
-
-        <!-- Chính sách khách hàng -->
-
-        <ImageView
-            android:id="@+id/bannerImageView"
-            android:layout_width="365dp"
-            android:layout_height="167dp"
-            android:layout_gravity="center"
-            android:contentDescription="Banner"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:text="CHÍNH SÁCH KHÁCH HÀNG TẠI NEWSHOP" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:orientation="horizontal"/>
 
-            <!-- Các item trong chính sách khách hàng -->
-            <!-- Ví dụ: Free Shipping -->
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_free_shipping"
-                    android:contentDescription="Free Shipping" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Free Shipping trên 250.000đ"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_hang_chinh_hang"
-                    android:contentDescription="Sản phẩm chính hãng" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sản phẩm chính hãng"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_thanh_toan_hang"
-                    android:contentDescription="Nhận hàng rồi thanh toán" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nhận hàng rồi thanh toán"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_doi_tra"
-                    android:contentDescription="Đổi trả dễ dàng trong 7 ngày" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đổi trả dễ dàng trong 7 ngày"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <!-- Thêm các item khác tương tự -->
-        </LinearLayout>
-
-        <!-- Danh sách khuyến mãi -->
-
-        <!-- Danh sách bán chạy -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BÁN CHẠY"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:textColor="@android:color/black" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/homeRecyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="24dp"/>
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            android:theme="@style/Base.Theme.MyBookStore"
+            tools:context=".HomeFragment">
 
+
+            <!-- Banner -->
+
+            <!-- Chính sách khách hàng -->
+
+            <ImageView
+                android:id="@+id/bannerImageView"
+                android:layout_width="365dp"
+                android:layout_height="167dp"
+                android:layout_gravity="center"
+                android:contentDescription="Banner"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CHÍNH SÁCH KHÁCH HÀNG TẠI NEWSHOP"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <!-- Các item trong chính sách khách hàng -->
+                <!-- Ví dụ: Free Shipping -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="Free Shipping"
+                        android:src="@drawable/ic_free_shipping" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Free Shipping trên 250.000đ"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="Sản phẩm chính hãng"
+                        android:src="@drawable/ic_hang_chinh_hang" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sản phẩm chính hãng"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="Nhận hàng rồi thanh toán"
+                        android:src="@drawable/ic_thanh_toan_hang" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Nhận hàng rồi thanh toán"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="Đổi trả dễ dàng trong 7 ngày"
+                        android:src="@drawable/ic_doi_tra" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Đổi trả dễ dàng trong 7 ngày"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Thêm các item khác tương tự -->
+            </LinearLayout>
+
+            <!-- Danh sách khuyến mãi -->
+
+            <!-- Danh sách bán chạy -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="BÁN CHẠY"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="24dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

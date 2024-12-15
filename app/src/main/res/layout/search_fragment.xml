@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
              android:layout_height="match_parent">
     <!-- res/layout/fragment_search.xml -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -13,11 +13,17 @@
         <!-- Toolbar -->
 
         <!-- Thanh tìm kiếm -->
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:background="@color/background_app"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp"
             android:padding="8dp"
             android:background="@color/background_app"
             android:gravity="center_vertical">
@@ -29,17 +35,9 @@
                 android:layout_weight="1"
                 android:hint="Nhập từ khoá tìm kiếm"
                 android:background="@color/white"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:padding="8dp"/>
 
-            <Button
-                android:id="@+id/searchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tìm"
-                android:layout_marginLeft="10dp"
-                android:backgroundTint="@color/red_100"
-                android:padding="8dp" />
         </LinearLayout>
 
         <!-- Kết quả tìm kiếm -->

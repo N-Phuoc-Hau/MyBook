@@ -1,25 +1,34 @@
-package com.haunp.mybookstore.presenters.fragment.user
+package com.haunp.mybookstore.presenters.fragment.orderDetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.haunp.mybookstore.databinding.ItemOrderBinding
+import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.domain.entity.OrderDetailEntity
+import java.text.NumberFormat
+import java.util.Locale
 
 class OrderDetailAdapter : RecyclerView.Adapter<OrderDetailAdapter.OrderDetailViewHolder>() {
-    private val orderDetail = mutableListOf<OrderDetailEntity>() // Danh sách dữ liệu hiển thị
 
-    fun submitList(newOrders: List<OrderDetailEntity>) {
-        orderDetail.clear()
-        orderDetail.addAll(newOrders)
+    private val books = mutableListOf<BookEntity>()// Danh sách dữ liệu hiển thị
+
+    fun submitList(newBooks: List<BookEntity>){
+        books.clear()
+        books.addAll(newBooks)
         notifyDataSetChanged()
     }
 
     inner class OrderDetailViewHolder(private val binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(orderDetail: OrderDetailEntity) {
-//            binding.tvPrice.text = orderDetail.totalAmount.toString()
-//            binding.tvDate.text = orderDetail.orderDate.toString()
+        fun bind(book: BookEntity) {
+            val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                .format(book.price)
+            binding.tvPrice.text = "$formattedPrice đ"
+            Glide.with(binding.root.context)
+                .load(book.imageUri)
+                .into(binding.imgBook)
         }
     }
 
@@ -29,7 +38,7 @@ class OrderDetailAdapter : RecyclerView.Adapter<OrderDetailAdapter.OrderDetailVi
     }
 
     override fun onBindViewHolder(holder: OrderDetailViewHolder, position: Int) {
-        holder.bind(orderDetail[position])
+        holder.bind(books[position])
     }
-    override fun getItemCount(): Int = orderDetail.size
+    override fun getItemCount(): Int = books.size
 }

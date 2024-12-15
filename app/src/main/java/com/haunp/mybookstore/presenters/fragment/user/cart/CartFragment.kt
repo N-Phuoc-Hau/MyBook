@@ -2,8 +2,10 @@ package com.haunp.mybookstore.presenters.fragment.user.cart
 
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.CartFragmentBinding
 import com.haunp.mybookstore.domain.entity.OrderDetailEntity
 import com.haunp.mybookstore.domain.entity.OrderEntity
@@ -14,7 +16,9 @@ import com.haunp.mybookstore.presenters.fragment.user.setting.SettingFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingViewModel
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import java.text.NumberFormat
 import java.time.LocalDate
+import java.util.Locale
 
 class CartFragment : BaseFragment<CartFragmentBinding>() {
 
@@ -32,9 +36,13 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
             rVCart.layoutManager = LinearLayoutManager(context)
             viewModel.getBookInCart(BookStoreManager.idUser!!)
             viewModel.bookInCart.observe(viewLifecycleOwner) { books ->
-                Log.d("hau.np", "initView: $books")
                 adapter.submitList(books)
-                tvPrice.text = books.sumOf { it.price }.toString()
+                val numberFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                val formattedPrice = numberFormat.format(books.sumOf { it.price })
+                tvPrice.text = "$formattedPrice đ"
+                tvPrice.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_100))
+                tvPrice.textSize = 18f
+                tvPrice.setTypeface(null, android.graphics.Typeface.BOLD)
             }
         }
     }
@@ -55,17 +63,19 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                 return@launch
             }
             val totalAmount = books.sumOf { it.price }
-            val tmp = OrderEntity(userId = userId!!, orderDate = LocalDate.now().toString(), quantity = books.size, totalAmount = totalAmount)
-            orderViewModel.insertOrder(tmp,userId)
-//
-//            val orderDetails = books.map { book ->
-//                OrderDetailEntity(
-//                    orderId = order.toInt(), // ID của đơn hàng
-//                    bookId = book.bookId,      // ID của sách
-//                    quantity = 1,             // Số lượng mặc định là 1
-//                    price = book.price        // Giá sách
-//                )
-//            }
+            val order = OrderEntity(userId = userId!!, orderDate = LocalDate.now().toString(), quantity = books.size, totalAmount = totalAmount)
+            val orderId = orderViewModel.insertOrder(order)
+            orderViewModel.getOrder(userId)
+
+            val orderDetails: List<OrderDetailEntity> = books.map { book ->
+                OrderDetailEntity(
+                    orderId = orderId.toInt(), // ID của đơn hàng
+                    bookId = book.bookId,      // ID của sách
+                    quantity = 1,             // Số lượng mặc định là 1
+                    price = book.price        // Giá sách
+                )
+            }.toList()
+            orderViewModel.insertOrderDetails(orderDetails)
             Toast.makeText(context, "Đặt hàng thành công", Toast.LENGTH_SHORT).show()
             viewModel.clearCart(userId)
             (activity as MainActivity).showFragment(SettingFragment())

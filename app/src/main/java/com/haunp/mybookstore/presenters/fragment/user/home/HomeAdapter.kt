@@ -9,6 +9,8 @@ import com.haunp.mybookstore.databinding.ItemBookAdminBinding
 import com.haunp.mybookstore.databinding.ItemBookBinding
 import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.presenters.fragment.admin.book.BookAdapter.BookViewHolder
+import java.text.NumberFormat
+import java.util.Locale
 
 class   HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     var onItemClick : (BookEntity) -> Unit = {}
@@ -22,7 +24,9 @@ class   HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
             RecyclerView.ViewHolder(binding.root) {
         fun bind(book: BookEntity) {
             binding.tvTittle.text = book.title
-            binding.tvPrice.text = book.price.toString()
+            val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                .format(book.price)
+            binding.tvPrice.text = "$formattedPrice đ"
             Glide.with(binding.root.context)
                 .load(book.imageUri)
                 .into(binding.imgBook)

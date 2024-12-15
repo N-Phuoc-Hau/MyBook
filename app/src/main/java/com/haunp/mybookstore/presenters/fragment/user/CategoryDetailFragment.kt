@@ -20,7 +20,7 @@ class CategoryDetailFragment:BaseFragment<CategoryDetailFragmentBinding>() {
     override fun getDataBinding(): CategoryDetailFragmentBinding {
         return CategoryDetailFragmentBinding.inflate(layoutInflater)
     }
-    var homeAdapter = HomeAdapter()
+    private var homeAdapter = HomeAdapter()
     override fun initView() {
         binding{
             recCategory.layoutManager = GridLayoutManager(context,2)

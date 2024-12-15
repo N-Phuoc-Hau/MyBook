@@ -18,10 +18,12 @@ class CoreViewModel(): ViewModel() {
     fun setUser(user: UserEntity){
         _user.value = user
         BookStoreManager.idUser = user.userId
+        BookStoreManager.userName = user.username
     }
     fun logout(){
         _user.value = null
         BookStoreManager.idUser = null
+        BookStoreManager.userName = null
     }
 
 }

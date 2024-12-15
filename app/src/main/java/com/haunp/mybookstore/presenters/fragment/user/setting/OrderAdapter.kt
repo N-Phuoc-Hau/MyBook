@@ -4,12 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.haunp.mybookstore.databinding.ItemOrderBinding
+import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.domain.entity.OrderDetailEntity
 import com.haunp.mybookstore.domain.entity.OrderEntity
+import java.text.NumberFormat
+import java.util.Locale
 
 class OrderAdapter : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
     private val orders = mutableListOf<OrderEntity>() // Danh sách dữ liệu hiển thị
-
+    var onItemClick : (OrderEntity) -> Unit = {}
     fun submitList(newOrders: List<OrderEntity>) {
         orders.clear()
         orders.addAll(newOrders)
@@ -19,8 +22,13 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
     inner class OrderViewHolder(private val binding: ItemOrderBinding) :
             RecyclerView.ViewHolder(binding.root) {
         fun bind(order: OrderEntity) {
-            binding.tvPrice.text = order.totalAmount.toString()
+            val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                .format(order.totalAmount)
+            binding.tvPrice.text = "$formattedPrice đ"
             binding.tvDate.text = order.orderDate.toString()
+            binding.root.setOnClickListener{
+                onItemClick(order)
+            }
         }
     }
 

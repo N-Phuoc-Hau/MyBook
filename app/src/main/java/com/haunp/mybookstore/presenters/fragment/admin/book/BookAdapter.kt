@@ -8,6 +8,8 @@ import com.bumptech.glide.Glide
 import com.haunp.mybookstore.databinding.ItemBookAdminBinding
 import com.haunp.mybookstore.databinding.ItemBookBinding
 import com.haunp.mybookstore.domain.entity.BookEntity
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
@@ -25,7 +27,9 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
                     binding.tvTittle.text = book.title
                     binding.tvAuthor.text = book.author
                     binding.tvQuantity.text = book.quantity.toString()
-                    binding.tvPrice.text = book.price.toString()
+                    val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                        .format(book.price)
+                    binding.tvPrice.text = "$formattedPrice đ"
                     Glide.with(binding.root.context)
                         .load(book.imageUri)
                         .into(binding.imgSelectedBook)

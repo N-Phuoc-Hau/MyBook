@@ -8,6 +8,7 @@ import com.haunp.mybookstore.data.database.dao.CartDao
 import com.haunp.mybookstore.data.database.dao.CategoryDao
 import com.haunp.mybookstore.data.database.dao.RateDao
 import com.haunp.mybookstore.data.database.dao.OrderDao
+import com.haunp.mybookstore.data.database.dao.OrderDetailDao
 import com.haunp.mybookstore.data.database.dao.UserDao
 import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.domain.entity.CartEntity
@@ -32,4 +33,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getCartDao(): CartDao
     abstract fun getOrderDao(): OrderDao
     abstract fun getRateDao(): RateDao
+    abstract fun getOrderDetailDao(): OrderDetailDao
 }
