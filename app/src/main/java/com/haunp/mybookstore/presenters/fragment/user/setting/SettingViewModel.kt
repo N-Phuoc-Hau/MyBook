@@ -21,8 +21,8 @@ class SettingViewModel(private val getOrder: GetOrderByUserUseCase,
             _orders.value = order
         }
     }
-    suspend fun insertOrder(order: OrderEntity, userId: Int): Int{
+    suspend fun insertOrder(order: OrderEntity, userId: Int){
         getOrder(userId)
-        return addOrderUseCase.invoke(order)
+        addOrderUseCase.invoke(order)
     }
 }

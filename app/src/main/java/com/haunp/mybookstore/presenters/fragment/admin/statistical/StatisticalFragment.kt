@@ -11,12 +11,13 @@ import org.koin.android.ext.android.inject
 
 class StatisticalFragment : BaseFragment<StatisticalFragmentBinding>() {
     private val viewModel: StatisticalViewModel by inject()
-    var adapter = StatisticalAdapter()
     override var isTerminalBackKeyActive: Boolean = true
 
     override fun getDataBinding(): StatisticalFragmentBinding {
         return StatisticalFragmentBinding.inflate(layoutInflater)
     }
+
+    var adapter = StatisticalAdapter()
     override fun initView() {
         binding.rvOrder.adapter = adapter
         binding.rvOrder.layoutManager = LinearLayoutManager(context)

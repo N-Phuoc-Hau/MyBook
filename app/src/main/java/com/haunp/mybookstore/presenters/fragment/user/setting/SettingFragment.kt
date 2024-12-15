@@ -22,7 +22,7 @@ class SettingFragment : BaseFragment<SettingFragmentBinding>() {
     override fun getDataBinding(): SettingFragmentBinding {
         return SettingFragmentBinding.inflate(layoutInflater)
     }
-
+    var adapter = OrderAdapter()
     override fun initView() {
         if (BookStoreManager.idUser != null) {
             binding.btnLogin.visibility = View.GONE
@@ -36,7 +36,6 @@ class SettingFragment : BaseFragment<SettingFragmentBinding>() {
         }
         if (BookStoreManager.idUser != null) {
             lifecycleScope.launch {
-                val adapter = OrderAdapter()
                 binding.rVOrder.adapter = adapter
                 binding.rVOrder.layoutManager = LinearLayoutManager(context)
                 viewModel.getOrder(BookStoreManager.idUser!!)
