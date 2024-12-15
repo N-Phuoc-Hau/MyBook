@@ -2,25 +2,39 @@ package com.haunp.mybookstore.presenters.fragment.admin.book
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.haunp.mybookstore.domain.entity.BookEntity
+import com.haunp.mybookstore.domain.entity.CategoryEntity
 import com.haunp.mybookstore.domain.repository.IBookRepository
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.DelBookUseCase
+import com.haunp.mybookstore.domain.usecase.GetCateByIDUseCase
+import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.UpdateBookUseCase
 import kotlinx.coroutines.launch
 
 class BookViewModel(private val getListBookUseCase: GetListBookUseCase,
                     private val addBookUseCase: AddBookUseCase,
                     private val delBookUseCase: DelBookUseCase,
-                    private val updateBookUseCase: UpdateBookUseCase
+                    private val updateBookUseCase: UpdateBookUseCase,
+                    private val getCateUseCase: GetCateUseCase
 ) : ViewModel() {
     val books : LiveData<List<BookEntity>> = liveData {
         emitSource(getListBookUseCase().asLiveData())
+    }
+    private val _categories = MutableLiveData<List<CategoryEntity>>()
+    val categories: LiveData<List<CategoryEntity>> = _categories
+    init {
+        viewModelScope.launch {
+            getCateUseCase().collect { categoriesList ->
+                _categories.postValue(categoriesList)
+            }
+        }
     }
     fun addBook(book: BookEntity) {
         viewModelScope.launch {
@@ -39,5 +53,9 @@ class BookViewModel(private val getListBookUseCase: GetListBookUseCase,
             Log.d("BookViewModel", "Updating book: $book")
             updateBookUseCase.invoke(book)
         }
+    }
+    fun isCategoryExist(categoryId: Int): Boolean {
+        val categoryIds = books.value?.map { it.categoryId }
+        return categoryIds?.contains(categoryId) ?: false
     }
 }

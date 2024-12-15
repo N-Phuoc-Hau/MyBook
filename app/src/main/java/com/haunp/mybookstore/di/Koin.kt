@@ -28,6 +28,7 @@ import com.haunp.mybookstore.domain.usecase.GetBookByCateIDUseCase
 import com.haunp.mybookstore.domain.usecase.GetBookByIdUseCase
 import com.haunp.mybookstore.domain.usecase.GetBookInCartUserCase
 import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
+import com.haunp.mybookstore.domain.usecase.GetCateByIDUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
 import com.haunp.mybookstore.domain.usecase.GetOrderByUserUseCase
@@ -105,6 +106,7 @@ var useCaseModule = module {
     factory { GetOrderDetailUseCase(get()) }
     factory { GetBookByIdUseCase(get()) }
     factory { AddOrderDetailUseCase(get()) }
+    factory { GetCateByIDUseCase(get()) }
 }
 
 var repositoryModule = module {

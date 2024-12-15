@@ -9,4 +9,5 @@ interface ICategoryRepository {
     suspend fun addCategory(categoryEntity: CategoryEntity)
     suspend fun deleteCategory(id: Int)
     suspend fun updateCategory(categoryEntity: CategoryEntity)
+    suspend fun getCategoryById(id: Int): CategoryEntity?
 }

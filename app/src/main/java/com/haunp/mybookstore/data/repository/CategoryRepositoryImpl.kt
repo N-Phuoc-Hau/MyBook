@@ -23,4 +23,8 @@ class CategoryRepositoryImpl(private var categoryDao: CategoryDao): ICategoryRep
         return categoryDao.updateCategory(categoryEntity)
     }
 
+    override suspend fun getCategoryById(id: Int): CategoryEntity? {
+        return categoryDao.getCategoryById(id)
+    }
+
 }

@@ -39,6 +39,7 @@ class CategoryUserFragment : BaseFragment<CategoryUserFragmentBinding>() {
         adapter.onItemClick = { category ->
             val bundle = Bundle().apply{
                 putInt("categoryId",category.categoryId)
+                putString("categoryName",category.name)
                 Log.d("hau,np", "initAction: ${category.categoryId}")
             }
             categoryDetailFragment.arguments = bundle

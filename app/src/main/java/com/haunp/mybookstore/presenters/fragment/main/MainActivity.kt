@@ -18,7 +18,6 @@ import com.haunp.mybookstore.presenters.fragment.admin.statistical.StatisticalFr
 import com.haunp.mybookstore.presenters.fragment.admin.user.UserFragment
 import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
 import com.haunp.mybookstore.presenters.fragment.user.cart.CartFragment
-import com.haunp.mybookstore.presenters.fragment.user.category_user.CategoryUserFragment
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeFragment
 import com.haunp.mybookstore.presenters.fragment.user.search.SearchFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingFragment

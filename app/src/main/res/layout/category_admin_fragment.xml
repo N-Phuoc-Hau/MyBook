@@ -5,101 +5,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="wrap_content"
-        android:layout_height="29dp"
-        android:background="@color/background_app"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_app"
-            android:padding="10dp"
-            android:textAlignment="center"
-            android:text="Quản Lý Danh Mục Sách"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-        <EditText
-            android:id="@+id/edt_IDCate"
-            android:hint="Nhập ID danh mục"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/edt_NameCate"
-            android:hint="Nhập tên danh mục"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnSelectImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:text="Thêm ảnh"
-            android:textColor="@color/black" />
+        <View
+            android:id="@+id/view4"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:background="@color/background_app" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:layout_height="235dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_app"
+                android:padding="10dp"
+                android:text="Quản Lý Danh Mục Sách"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edt_IDCate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập ID danh mục" />
+
+            <EditText
+                android:id="@+id/edt_NameCate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập tên danh mục" />
 
             <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="135dp"
+                android:id="@+id/btnSelectImage"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:backgroundTint="@color/red_100"
-                android:text="Thêm" />
+                android:backgroundTint="@color/white"
+                android:text="Thêm ảnh"
+                android:textColor="@color/black" />
 
-            <Button
-                android:id="@+id/btnDel"
-                android:layout_width="116dp"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:backgroundTint="@color/red_100"
-                android:text="Xóa" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnUpdate"
-                android:layout_width="133dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:backgroundTint="@color/red_100"
-                android:text="Cập nhật" />
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="2dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="@color/red_100"
+                    android:text="Thêm" />
+
+                <Button
+                    android:id="@+id/btnDel"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="2dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="@color/red_100"
+                    android:text="Xóa" />
+
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="2dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="@color/red_100"
+                    android:text="Cập nhật" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryAdminRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp" >
+            android:layout_height="350dp">
 
         </androidx.recyclerview.widget.RecyclerView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/ftbAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            app:elevation="0dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
