@@ -6,7 +6,7 @@ import com.haunp.mybookstore.domain.repository.IOrderRepository
 
 class OrderRepositoryImpl(private val orderDao: OrderDao): IOrderRepository {
     override suspend fun insertOrder(order: OrderEntity): Int {
-        return orderDao.insertOrder(order)
+        return orderDao.insertOrder(order).toInt()
     }
     override suspend fun getAllOrderForAdmin():List<OrderEntity>{
         if(orderDao.getAllOrders().isEmpty()){

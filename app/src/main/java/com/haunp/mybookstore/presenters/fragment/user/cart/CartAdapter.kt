@@ -13,11 +13,10 @@ import com.haunp.mybookstore.domain.entity.BookEntity
 import com.haunp.mybookstore.domain.entity.CartEntity
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-    private val books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
+    private var books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
 
     fun submitList(newBooks: List<BookEntity>) {
-        books.clear()
-        books.addAll(newBooks)
+        books = newBooks.toMutableList()
         notifyDataSetChanged()
     }
 

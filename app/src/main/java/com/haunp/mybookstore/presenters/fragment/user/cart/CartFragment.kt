@@ -33,7 +33,8 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
             viewModel.getBookInCart(BookStoreManager.idUser!!)
             viewModel.bookInCart.observe(viewLifecycleOwner) { books ->
                 Log.d("hau.np", "initView: $books")
-                adapter.submitList(books)
+                val listBook = books
+                adapter.submitList(listBook)
                 tvPrice.text = books.sumOf { it.price }.toString()
             }
         }
