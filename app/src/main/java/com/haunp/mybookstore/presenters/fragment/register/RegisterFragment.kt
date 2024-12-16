@@ -1,9 +1,8 @@
 package com.haunp.mybookstore.presenters.fragment.register
 
 import android.os.Bundle
-import android.util.Log
 import com.haunp.mybookstore.databinding.FragmentRegisterBinding
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.UserEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.login.LoginFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity

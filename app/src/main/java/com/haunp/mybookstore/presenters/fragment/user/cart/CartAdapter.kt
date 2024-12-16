@@ -1,23 +1,17 @@
 package com.haunp.mybookstore.presenters.fragment.user.cart
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.haunp.mybookstore.databinding.ItemBookBinding
 import com.haunp.mybookstore.databinding.ItemCartBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.CartEntity
+import com.haunp.mybookstore.domain.model.BookEntity
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-    private val books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
+    private var books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
 
     fun submitList(newBooks: List<BookEntity>) {
-        books.clear()
-        books.addAll(newBooks)
+        books = newBooks.toMutableList()
         notifyDataSetChanged()
     }
 

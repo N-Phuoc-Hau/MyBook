@@ -1,4 +1,4 @@
-package com.haunp.mybookstore.domain.entity
+package com.haunp.mybookstore.domain.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey

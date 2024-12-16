@@ -1,9 +1,8 @@
 package com.haunp.mybookstore.data.repository
 
 
-import androidx.lifecycle.LiveData
 import com.haunp.mybookstore.data.database.dao.BookDao
-import com.haunp.mybookstore.domain.entity.BookEntity
+import com.haunp.mybookstore.domain.model.BookEntity
 import com.haunp.mybookstore.domain.repository.IBookRepository
 import kotlinx.coroutines.flow.Flow
 

@@ -4,22 +4,19 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.HomeFragmentBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
+import com.haunp.mybookstore.domain.model.BookEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.login.LoginFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
 import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
-import org.koin.android.ext.android.inject
 
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>() {

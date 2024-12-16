@@ -3,10 +3,8 @@ package com.haunp.mybookstore.presenters.fragment.admin.user
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.haunp.mybookstore.databinding.ItemBookAdminBinding
 import com.haunp.mybookstore.databinding.ItemUserBinding
-import com.haunp.mybookstore.domain.entity.UserEntity
-import com.haunp.mybookstore.presenters.fragment.admin.book.BookAdapter.BookViewHolder
+import com.haunp.mybookstore.domain.model.UserEntity
 
 class UserAdapter :RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
     private val users = mutableListOf<UserEntity>()

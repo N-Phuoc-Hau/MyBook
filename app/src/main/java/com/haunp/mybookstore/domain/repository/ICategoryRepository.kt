@@ -1,7 +1,6 @@
 package com.haunp.mybookstore.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.haunp.mybookstore.domain.entity.CategoryEntity
+import com.haunp.mybookstore.domain.model.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
 interface ICategoryRepository {

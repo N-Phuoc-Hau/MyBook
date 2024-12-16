@@ -1,12 +1,10 @@
 package com.haunp.mybookstore.presenters.fragment.user.setting
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
-import com.haunp.mybookstore.domain.entity.OrderEntity
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.OrderDetailEntity
+import com.haunp.mybookstore.domain.model.OrderEntity
 import com.haunp.mybookstore.domain.usecase.AddOrderDetailUseCase
 import com.haunp.mybookstore.domain.usecase.AddOrderUseCase
 import com.haunp.mybookstore.domain.usecase.GetOrderByUserUseCase

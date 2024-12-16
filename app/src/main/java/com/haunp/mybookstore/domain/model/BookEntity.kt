@@ -1,4 +1,4 @@
-package com.haunp.mybookstore.domain.entity
+package com.haunp.mybookstore.domain.model
 
 import android.os.Parcelable
 import androidx.room.Entity

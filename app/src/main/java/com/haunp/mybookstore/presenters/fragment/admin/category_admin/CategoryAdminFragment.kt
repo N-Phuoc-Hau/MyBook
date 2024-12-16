@@ -7,10 +7,9 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.haunp.mybookstore.databinding.CategoryAdminFragmentBinding
-import com.haunp.mybookstore.domain.entity.CategoryEntity
+import com.haunp.mybookstore.domain.model.CategoryEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import org.koin.android.ext.android.inject
 

@@ -8,9 +8,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.SearchFragmentBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
+import com.haunp.mybookstore.domain.model.BookEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
-import com.haunp.mybookstore.presenters.fragment.admin.book.BookAdapter
 import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeAdapter
 import org.koin.android.ext.android.inject

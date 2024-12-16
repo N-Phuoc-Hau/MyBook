@@ -1,7 +1,7 @@
 package com.haunp.mybookstore.data.repository
 
 import com.haunp.mybookstore.data.database.dao.CategoryDao
-import com.haunp.mybookstore.domain.entity.CategoryEntity
+import com.haunp.mybookstore.domain.model.CategoryEntity
 import com.haunp.mybookstore.domain.repository.ICategoryRepository
 import kotlinx.coroutines.flow.Flow
 

@@ -1,7 +1,6 @@
 package com.haunp.mybookstore.domain.usecase
 
-import android.util.Log
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.UserEntity
 import com.haunp.mybookstore.domain.repository.IUserRepository
 
 class LoginUseCase(private val repository: IUserRepository) {

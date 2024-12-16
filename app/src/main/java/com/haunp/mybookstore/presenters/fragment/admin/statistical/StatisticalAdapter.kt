@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.haunp.mybookstore.databinding.ItemStatisticalBinding
-import com.haunp.mybookstore.domain.entity.OrderEntity
-import com.haunp.mybookstore.domain.repository.IUserRepository
-import org.koin.java.KoinJavaComponent.inject
+import com.haunp.mybookstore.domain.model.OrderEntity
 
 class StatisticalAdapter() : RecyclerView.Adapter<StatisticalAdapter.StatisticalViewHolder>() {
     private val orders = mutableListOf<Pair<OrderEntity, String>>() // Danh sách dữ liệu hiển thị

@@ -2,8 +2,7 @@ package com.haunp.mybookstore.data.repository
 
 import com.haunp.mybookstore.data.database.dao.CartDao
 import com.haunp.mybookstore.data.database.dao.UserDao
-import com.haunp.mybookstore.domain.entity.CartEntity
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.UserEntity
 import com.haunp.mybookstore.domain.repository.IUserRepository
 import kotlinx.coroutines.flow.Flow
 

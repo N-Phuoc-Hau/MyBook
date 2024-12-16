@@ -1,6 +1,6 @@
 package com.haunp.mybookstore.domain.usecase
 
-import com.haunp.mybookstore.domain.entity.CartEntity
+import com.haunp.mybookstore.domain.model.CartEntity
 import com.haunp.mybookstore.domain.repository.ICartRepository
 
 class GetCartByUserIdUseCase(private val cartRepo: ICartRepository) {

@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.databinding.OrderDetailFragmentBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.OrderEntity
+import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.OrderEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.OrderAdapter
 import kotlinx.coroutines.Dispatchers

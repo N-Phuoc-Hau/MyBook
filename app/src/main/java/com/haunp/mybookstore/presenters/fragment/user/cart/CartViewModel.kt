@@ -4,11 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.CartEntity
-import com.haunp.mybookstore.domain.entity.OrderEntity
+import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.CartEntity
 import com.haunp.mybookstore.domain.repository.IBookRepository
-import com.haunp.mybookstore.domain.usecase.AddOrderUseCase
 import com.haunp.mybookstore.domain.usecase.GetBookInCartUserCase
 import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
 import com.haunp.mybookstore.domain.usecase.UpdateCartUseCase

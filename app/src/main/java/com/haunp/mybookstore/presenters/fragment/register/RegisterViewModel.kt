@@ -2,7 +2,7 @@ package com.haunp.mybookstore.presenters.fragment.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.UserEntity
 import com.haunp.mybookstore.domain.usecase.RegisterUseCase
 import kotlinx.coroutines.launch
 

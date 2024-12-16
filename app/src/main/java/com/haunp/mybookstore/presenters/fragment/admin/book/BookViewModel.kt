@@ -7,13 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.CategoryEntity
-import com.haunp.mybookstore.domain.repository.IBookRepository
+import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.CategoryEntity
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.DelBookUseCase
-import com.haunp.mybookstore.domain.usecase.GetCateByIDUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.UpdateBookUseCase
 import kotlinx.coroutines.launch

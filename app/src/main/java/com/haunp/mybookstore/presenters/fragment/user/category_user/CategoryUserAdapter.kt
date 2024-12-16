@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.haunp.mybookstore.databinding.ItemCategoryBinding
-import com.haunp.mybookstore.domain.entity.CategoryEntity
+import com.haunp.mybookstore.domain.model.CategoryEntity
 
 class CategoryUserAdapter() : RecyclerView.Adapter<CategoryUserAdapter.CategoryUserViewHolder>() {
     var onItemClick : (CategoryEntity) -> Unit = {}

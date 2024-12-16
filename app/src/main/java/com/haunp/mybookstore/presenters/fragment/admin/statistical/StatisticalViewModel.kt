@@ -3,7 +3,7 @@ package com.haunp.mybookstore.presenters.fragment.admin.statistical
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.haunp.mybookstore.domain.entity.OrderEntity
+import com.haunp.mybookstore.domain.model.OrderEntity
 import com.haunp.mybookstore.domain.repository.IUserRepository
 import com.haunp.mybookstore.domain.usecase.GetAllOrderUseCase
 

@@ -1,6 +1,6 @@
 package com.haunp.mybookstore.domain.repository
 
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
+import com.haunp.mybookstore.domain.model.OrderDetailEntity
 
 interface IOrderDetailRepository {
     suspend fun createOrderDetails(orderDetails: List<OrderDetailEntity>)

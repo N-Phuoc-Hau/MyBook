@@ -1,11 +1,9 @@
 package com.haunp.mybookstore.presenters.fragment.admin.user
 
-import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.databinding.UserFragmentBinding
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.UserEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import org.koin.android.ext.android.inject
 

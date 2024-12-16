@@ -1,7 +1,6 @@
 package com.haunp.mybookstore.domain.repository
 
-import com.haunp.mybookstore.domain.entity.CartEntity
-import com.haunp.mybookstore.domain.entity.UserEntity
+import com.haunp.mybookstore.domain.model.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 interface IUserRepository {

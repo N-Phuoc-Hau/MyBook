@@ -1,7 +1,7 @@
 package com.haunp.mybookstore.data.repository
 
 import com.haunp.mybookstore.data.database.dao.OrderDetailDao
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
+import com.haunp.mybookstore.domain.model.OrderDetailEntity
 import com.haunp.mybookstore.domain.repository.IOrderDetailRepository
 
 class OrderDetailRepositoryImpl(private val orderDetailDao: OrderDetailDao) : IOrderDetailRepository {

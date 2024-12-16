@@ -1,22 +1,18 @@
 package com.haunp.mybookstore.presenters.fragment.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import com.haunp.mybookstore.databinding.FragmentLoginBinding
-import com.haunp.mybookstore.domain.entity.UserEntity
-import com.haunp.mybookstore.presenters.BookStoreManager
+import com.haunp.mybookstore.domain.model.UserEntity
 import com.haunp.mybookstore.presenters.CoreViewModel
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.admin.book.BookFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
 import com.haunp.mybookstore.presenters.fragment.register.RegisterFragment
-import com.haunp.mybookstore.presenters.fragment.user.cart.CartViewModel
 import org.koin.android.ext.android.inject
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {

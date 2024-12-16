@@ -1,12 +1,10 @@
 package com.haunp.mybookstore.data.repository
 
-import android.util.Log
-import android.widget.Toast
 import com.haunp.mybookstore.data.database.dao.BookDao
 import com.haunp.mybookstore.data.database.dao.CartDao
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.CartEntity
-import com.haunp.mybookstore.domain.entity.Converters
+import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.CartEntity
+import com.haunp.mybookstore.domain.model.Converters
 import com.haunp.mybookstore.domain.repository.ICartRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -1,14 +1,13 @@
 package com.haunp.mybookstore.presenters.fragment.user.cart
 
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.CartFragmentBinding
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
-import com.haunp.mybookstore.domain.entity.OrderEntity
+import com.haunp.mybookstore.domain.model.OrderDetailEntity
+import com.haunp.mybookstore.domain.model.OrderEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity

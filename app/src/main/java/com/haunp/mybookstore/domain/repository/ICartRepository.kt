@@ -1,9 +1,7 @@
 package com.haunp.mybookstore.domain.repository
 
-import com.haunp.mybookstore.data.database.dao.CartDao
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.CartEntity
-import kotlinx.coroutines.flow.Flow
+import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.CartEntity
 
 interface ICartRepository {
     fun createCart(cart:CartEntity)

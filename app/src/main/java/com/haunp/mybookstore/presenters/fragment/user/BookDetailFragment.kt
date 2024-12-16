@@ -1,11 +1,10 @@
 package com.haunp.mybookstore.presenters.fragment.user
 
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.BookDetailFragmentBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
+import com.haunp.mybookstore.domain.model.BookEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.user.cart.CartFragment

@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
+import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.OrderDetailEntity
 import com.haunp.mybookstore.domain.usecase.GetBookByIdUseCase
 import com.haunp.mybookstore.domain.usecase.GetOrderDetailUseCase
 

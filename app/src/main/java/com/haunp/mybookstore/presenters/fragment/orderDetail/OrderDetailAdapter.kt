@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.haunp.mybookstore.databinding.ItemOrderBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
+import com.haunp.mybookstore.domain.model.BookEntity
 import java.text.NumberFormat
 import java.util.Locale
 

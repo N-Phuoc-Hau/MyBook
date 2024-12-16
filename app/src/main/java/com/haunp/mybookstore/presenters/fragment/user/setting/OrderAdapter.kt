@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.haunp.mybookstore.databinding.ItemOrderBinding
-import com.haunp.mybookstore.domain.entity.BookEntity
-import com.haunp.mybookstore.domain.entity.OrderDetailEntity
-import com.haunp.mybookstore.domain.entity.OrderEntity
+import com.haunp.mybookstore.domain.model.OrderEntity
 import java.text.NumberFormat
 import java.util.Locale
 

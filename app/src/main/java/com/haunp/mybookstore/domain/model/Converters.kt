@@ -1,7 +1,6 @@
-package com.haunp.mybookstore.domain.entity
+package com.haunp.mybookstore.domain.model
 
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 
 class Converters {
     @TypeConverter
