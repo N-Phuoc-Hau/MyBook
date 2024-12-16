@@ -6,12 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.haunp.mybookstore.databinding.ItemCartBinding
 import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.presenters.BookStoreManager
+import java.text.NumberFormat
+import java.util.Locale
 
-class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-    private var books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
+class CartAdapter(private val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+    private val books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
 
     fun submitList(newBooks: List<BookEntity>) {
-        books = newBooks.toMutableList()
+        books.clear()
+        books.addAll(newBooks)
         notifyDataSetChanged()
     }
 
@@ -19,10 +23,29 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
             fun bind(book: BookEntity) {
                 binding.tvTitle.text = book.title
-                binding.tvPrice.text = book.price.toString()
+                val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+                    .format(book.price * binding.tvQuantity.text.toString().toInt())
+                binding.tvPrice.text = "$formattedPrice đ"
                 Glide.with(binding.root.context)
                     .load(book.imageUri)
                     .into(binding.imgIcon)
+
+                binding.btnMinus.setOnClickListener {
+                    val currentQuantity = binding.tvQuantity.text.toString().toInt()
+                    if (currentQuantity > 1) {
+                        val newQuantity = currentQuantity - 1
+                        binding.tvQuantity.text = newQuantity.toString()
+                    }
+                }
+                binding.btnPlus.setOnClickListener {
+                    val currentQuantity = binding.tvQuantity.text.toString().toInt()
+                    val newQuantity = currentQuantity + 1
+                    binding.tvQuantity.text = newQuantity.toString()
+                }
+                binding.btnRemove.setOnClickListener {
+                    val bookToRemove = books[adapterPosition]
+                    cartViewModel.deleteBookInCart(bookToRemove.bookId, BookStoreManager.idUser!!)
+                }
             }
     }
 

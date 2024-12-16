@@ -26,7 +26,5 @@ interface CartDao {
     @Update
     fun updateCart(cart: CartEntity)
 
-//    @Query("SELECT bookId FROM carts WHERE userid = :userId")
-//    fun getBookInCartByUser(userId: Int): Flow<List<Int>>
 
 }

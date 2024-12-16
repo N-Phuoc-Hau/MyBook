@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.haunp.mybookstore.databinding.ItemCategoryBinding
 import com.haunp.mybookstore.domain.model.CategoryEntity
 
@@ -22,7 +23,9 @@ class CategoryUserAdapter() : RecyclerView.Adapter<CategoryUserAdapter.CategoryU
             binding.apply {
                 // Bind dữ liệu category
                 tvCategoryName.text = category.name
-                ivCategoryImage.setImageURI(category.imageUri.toUri())
+                Glide.with(binding.root.context)
+                    .load(category.imageUri.toUri())
+                    .into(ivCategoryImage)
                 root.setOnClickListener {
                     onItemClick(category)
                 }

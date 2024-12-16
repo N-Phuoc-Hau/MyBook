@@ -39,7 +39,13 @@ class CartRepositoryImpl(private val cartDao: CartDao, private val bookDao: Book
         withContext(Dispatchers.IO) {
             val cart = cartDao.getCartByUserId(userId)
             if (cart != null) {
-                val bookIds = cart.bookId.let { Converters().toBookIdList(it) } ?: emptyList()
+                // Kiểm tra nếu bookId là chuỗi trống trước khi chuyển đổi
+                val bookIds = if (cart.bookId.isNotEmpty()) {
+                    Converters().toBookIdList(cart.bookId)
+                } else {
+                    emptyList()
+                }
+
                 if (bookId in bookIds) {
                     return@withContext // Dừng hàm nếu sách đã tồn tại
                 }
@@ -61,15 +67,43 @@ class CartRepositoryImpl(private val cartDao: CartDao, private val bookDao: Book
         }
     }
 
+
     override suspend fun getBookInCartByUser(userId: Int): List<BookEntity> {
         return withContext(Dispatchers.IO) {
-            val cart = getCartByUserId(userId) ?: return@withContext  emptyList()
-            val bookIds =
-                Converters().toBookIdList(cart.bookId) //chuyển từ kiểu String sang dạng List<Int> nhưng chưa chuyển
-            bookDao.getBooksByIds(bookIds) // Truy vấn danh sách BookEntity từ bookDao dữ liệu truyển vào là List<Int>
+            val cart = getCartByUserId(userId) ?: return@withContext emptyList()
+            // Kiểm tra chuỗi bookId có hợp lệ hay không
+            val bookIds = if (cart.bookId.isNotEmpty()) {
+                Converters().toBookIdList(cart.bookId) // Chuyển từ String sang List<Int>
+            } else {
+                emptyList() // Nếu chuỗi trống, trả về danh sách trống
+            }
+            // Truy vấn sách từ bookDao
+            bookDao.getBooksByIds(bookIds)
         }
     }
     override suspend fun clearCart(userId: Int) {
         cartDao.clearCart(userId)
+    }
+
+    override suspend fun deleteBookInCart(bookId: Int, userId: Int) {
+        withContext(Dispatchers.IO) {
+            val cart = cartDao.getCartByUserId(userId)
+            if (cart != null) {
+                // Chuyển đổi bookId từ chuỗi thành danh sách nếu cần
+                val bookIds = cart.bookId.let { Converters().toBookIdList(it) } ?: emptyList()
+                if (bookId in bookIds) {
+                    val updatedBookIds = bookIds.toMutableList().apply { remove(bookId) }
+
+                    // Cập nhật lại danh sách bookId trong cart
+                    cart.bookId = Converters().fromBookIdList(updatedBookIds)
+
+                    // Cập nhật lại Cart trong database
+                    cartDao.updateCart(cart)
+                }
+            }
+            if (cartDao.getCartByUserId(userId)?.bookId.isNullOrEmpty()) {
+                cartDao.clearCart(userId)
+            }
+        }
     }
 }

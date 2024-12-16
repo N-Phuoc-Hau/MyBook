@@ -31,7 +31,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
 
     override fun initView() {
         binding {
-            val adapter = HomeAdapter()
+            val adapter = CartAdapter(viewModel)
             rVCart.adapter = adapter
             rVCart.layoutManager = LinearLayoutManager(context)
             viewModel.getBookInCart(BookStoreManager.idUser!!)
