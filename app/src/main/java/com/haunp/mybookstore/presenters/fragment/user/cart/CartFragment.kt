@@ -12,6 +12,7 @@ import com.haunp.mybookstore.domain.entity.OrderEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
+import com.haunp.mybookstore.presenters.fragment.user.home.HomeAdapter
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingViewModel
 import kotlinx.coroutines.launch
@@ -31,7 +32,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
 
     override fun initView() {
         binding {
-            val adapter = CartAdapter()
+            val adapter = HomeAdapter()
             rVCart.adapter = adapter
             rVCart.layoutManager = LinearLayoutManager(context)
             viewModel.getBookInCart(BookStoreManager.idUser!!)

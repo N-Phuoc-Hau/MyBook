@@ -103,10 +103,10 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
             selectedImageUri = result.data?.data
         }
     }
+
     private fun saveCategoriesToSharedPreferences(categoryList: List<CategoryEntity>) {
         val sharedPreferences = requireContext().getSharedPreferences("CateAppPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-
 
         // Chuyển danh sách thành JSON
         val gson = Gson()
@@ -116,6 +116,7 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
         editor.putString("cate_list", json)
         editor.apply()
     }
+
     private fun clearText(){
         binding{
             edtIDCate.setText("")

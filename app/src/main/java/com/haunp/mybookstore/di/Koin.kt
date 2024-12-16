@@ -69,7 +69,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
 var viewModelModule = module {
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
-    viewModel { BookViewModel(get(),get(),get(),get()) }
+    viewModel { BookViewModel(get(),get(),get(),get(),get()) }
     viewModel { UserViewModel(get(),get(),get(),get()) }
     viewModel { CategoryAdminViewModel(get(),get(),get(),get())  }
     viewModel { StatisticalViewModel(get(),get()) }

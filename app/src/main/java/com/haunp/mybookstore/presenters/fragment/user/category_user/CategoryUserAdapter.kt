@@ -2,6 +2,7 @@ package com.haunp.mybookstore.presenters.fragment.user.category_user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.haunp.mybookstore.databinding.ItemCategoryBinding
 import com.haunp.mybookstore.domain.entity.CategoryEntity
@@ -21,6 +22,7 @@ class CategoryUserAdapter() : RecyclerView.Adapter<CategoryUserAdapter.CategoryU
             binding.apply {
                 // Bind dữ liệu category
                 tvCategoryName.text = category.name
+                ivCategoryImage.setImageURI(category.imageUri.toUri())
                 root.setOnClickListener {
                     onItemClick(category)
                 }
