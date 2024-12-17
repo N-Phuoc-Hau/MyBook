@@ -1,10 +1,12 @@
-package com.haunp.mybookstore.presenters.fragment.user
+package com.haunp.mybookstore.presenters.fragment.user.book_detail
 
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.BookDetailFragmentBinding
 import com.haunp.mybookstore.domain.model.BookEntity
+import com.haunp.mybookstore.domain.model.RateEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.user.cart.CartFragment
@@ -20,12 +22,13 @@ class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
     private var book: BookEntity? = null
     override var isTerminalBackKeyActive: Boolean = true
     private val viewModel: CartViewModel by inject()
+    private val rateViewModel: RateViewModel by inject()
 
     override fun getDataBinding(): BookDetailFragmentBinding {
         return BookDetailFragmentBinding.inflate(layoutInflater)
     }
 
-    var adapter = HomeAdapter()
+    var adapter = RateAdapter()
     override fun initView() {
         binding {
             book = arguments?.getParcelable("book")
@@ -40,6 +43,14 @@ class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
                     .load(it.imageUri) // Nếu imageUri là URL hoặc đường dẫn tệp
                     .into(imgBook)
             }
+            rvRate.adapter = adapter
+            rvRate.layoutManager = LinearLayoutManager(context)
+            lifecycleScope.launch {
+                rateViewModel.getListRate(book!!.bookId)
+            }
+            rateViewModel.rate.observe(viewLifecycleOwner) {
+                adapter.submitList(it)
+            }
         }
     }
 
@@ -53,6 +64,22 @@ class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
                     .replace(R.id.fragment_container, CartFragment())
                     .addToBackStack(null)
                     .commit()
+            }
+            btnSubmitComment.setOnClickListener {
+                val comment = edtComment.text.toString()
+                if (comment.isEmpty()) {
+                    return@setOnClickListener
+                }
+                val rate = RateEntity(
+                    userName = BookStoreManager.userName!!,
+                    bookId = book!!.bookId,
+                    rating = 5,
+                    comment = comment
+                )
+                edtComment.text.clear()
+                lifecycleScope.launch {
+                    rateViewModel.addRate(rate)
+                }
             }
 
         }

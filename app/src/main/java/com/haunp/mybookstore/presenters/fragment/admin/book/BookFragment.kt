@@ -50,10 +50,10 @@ class BookFragment : BaseFragment<BookFragmentBinding>() {
                     return@setOnClickListener
                 }
                 val categoryId = category.toIntOrNull()
-                if (categoryId == null || !viewModel.isCategoryExist(categoryId)) {
-                    Toast.makeText(context, "Danh mục không tồn tại", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
+//                if (categoryId == null || !viewModel.isCategoryExist(categoryId)) {
+//                    Toast.makeText(context, "Danh mục không tồn tại", Toast.LENGTH_SHORT).show()
+//                    return@setOnClickListener
+//                }
                 val bookEntity = BookEntity(
                     title = title,
                     author = author,

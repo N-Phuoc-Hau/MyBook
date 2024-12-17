@@ -10,7 +10,7 @@ import com.haunp.mybookstore.R.id.fragment_container
 import com.haunp.mybookstore.databinding.CategoryUserFragmentBinding
 import com.haunp.mybookstore.domain.model.CategoryEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
-import com.haunp.mybookstore.presenters.fragment.user.CategoryDetailFragment
+import com.haunp.mybookstore.presenters.fragment.user.book_detail.CategoryDetailFragment
 import org.koin.android.ext.android.inject
 
 class CategoryUserFragment : BaseFragment<CategoryUserFragmentBinding>() {

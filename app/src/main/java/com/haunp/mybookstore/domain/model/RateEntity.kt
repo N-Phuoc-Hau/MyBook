@@ -8,12 +8,6 @@ import androidx.room.PrimaryKey
     tableName = "comments",
     foreignKeys = [
         ForeignKey(
-            entity = UserEntity::class,
-            parentColumns = ["userId"],
-            childColumns = ["userId"],
-            onDelete = ForeignKey.CASCADE
-        ),
-        ForeignKey(
             entity = BookEntity::class,
             parentColumns = ["bookId"],
             childColumns = ["bookId"],
@@ -23,7 +17,7 @@ import androidx.room.PrimaryKey
 )
 data class RateEntity(
     @PrimaryKey(autoGenerate = true) val rateBookId: Int = 0,
-    val userId: Int,
+    val userName: String,
     val bookId: Int,
     val rating: Int,
     val comment: String

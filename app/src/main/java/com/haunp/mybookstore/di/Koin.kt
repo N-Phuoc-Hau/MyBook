@@ -7,17 +7,20 @@ import com.haunp.mybookstore.data.repository.CartRepositoryImpl
 import com.haunp.mybookstore.data.repository.CategoryRepositoryImpl
 import com.haunp.mybookstore.data.repository.OrderDetailRepositoryImpl
 import com.haunp.mybookstore.data.repository.OrderRepositoryImpl
+import com.haunp.mybookstore.data.repository.RateRepositoryImpl
 import com.haunp.mybookstore.data.repository.UserRepositoryImpl
 import com.haunp.mybookstore.domain.repository.IBookRepository
 import com.haunp.mybookstore.domain.repository.ICartRepository
 import com.haunp.mybookstore.domain.repository.ICategoryRepository
 import com.haunp.mybookstore.domain.repository.IOrderDetailRepository
 import com.haunp.mybookstore.domain.repository.IOrderRepository
+import com.haunp.mybookstore.domain.repository.IRateRepository
 import com.haunp.mybookstore.domain.repository.IUserRepository
 import com.haunp.mybookstore.domain.usecase.AddBookUseCase
 import com.haunp.mybookstore.domain.usecase.AddCateUseCase
 import com.haunp.mybookstore.domain.usecase.AddOrderDetailUseCase
 import com.haunp.mybookstore.domain.usecase.AddOrderUseCase
+import com.haunp.mybookstore.domain.usecase.AddRateUseCase
 import com.haunp.mybookstore.domain.usecase.DelBookInCartUseCase
 import com.haunp.mybookstore.domain.usecase.DelBookUseCase
 import com.haunp.mybookstore.domain.usecase.DelCateUseCase
@@ -32,6 +35,7 @@ import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateByIDUseCase
 import com.haunp.mybookstore.domain.usecase.GetCateUseCase
 import com.haunp.mybookstore.domain.usecase.GetListBookUseCase
+import com.haunp.mybookstore.domain.usecase.GetListRateUseCase
 import com.haunp.mybookstore.domain.usecase.GetOrderByUserUseCase
 import com.haunp.mybookstore.domain.usecase.GetOrderDetailUseCase
 import com.haunp.mybookstore.domain.usecase.LoginUseCase
@@ -46,6 +50,7 @@ import com.haunp.mybookstore.presenters.fragment.admin.user.UserViewModel
 import com.haunp.mybookstore.presenters.fragment.login.LoginViewModel
 import com.haunp.mybookstore.presenters.fragment.register.RegisterViewModel
 import com.haunp.mybookstore.presenters.fragment.orderDetail.OrderDetailViewModel
+import com.haunp.mybookstore.presenters.fragment.user.book_detail.RateViewModel
 import com.haunp.mybookstore.presenters.fragment.user.cart.CartViewModel
 import com.haunp.mybookstore.presenters.fragment.user.category_user.CategoryUserViewModel
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeViewModel
@@ -80,6 +85,7 @@ var viewModelModule = module {
     viewModel { SettingViewModel(get(),get(),get()) }
     viewModel { OrderDetailViewModel(get(),get()) }
     viewModel { CartViewModel(get(),get(),get(),get(),get()) }
+    viewModel { RateViewModel(get(),get()) }
 }
 
 
@@ -109,6 +115,8 @@ var useCaseModule = module {
     factory { AddOrderDetailUseCase(get()) }
     factory { GetCateByIDUseCase(get()) }
     factory { DelBookInCartUseCase(get()) }
+    factory { AddRateUseCase(get()) }
+    factory { GetListRateUseCase(get()) }
 }
 
 var repositoryModule = module {
@@ -118,6 +126,7 @@ var repositoryModule = module {
     single<ICartRepository> { CartRepositoryImpl(get(),get()) }
     single<IOrderRepository> { OrderRepositoryImpl(get()) }
     single<IOrderDetailRepository> { OrderDetailRepositoryImpl(get()) }
+    single<IRateRepository> { RateRepositoryImpl(get()) }
 }
 
 val databaseModule = module {

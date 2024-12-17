@@ -6,7 +6,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.haunp.mybookstore.R
@@ -16,7 +15,7 @@ import com.haunp.mybookstore.presenters.fragment.admin.book.BookFragment
 import com.haunp.mybookstore.presenters.fragment.admin.category_admin.CategoryAdminFragment
 import com.haunp.mybookstore.presenters.fragment.admin.statistical.StatisticalFragment
 import com.haunp.mybookstore.presenters.fragment.admin.user.UserFragment
-import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
+import com.haunp.mybookstore.presenters.fragment.user.book_detail.BookDetailFragment
 import com.haunp.mybookstore.presenters.fragment.user.cart.CartFragment
 import com.haunp.mybookstore.presenters.fragment.user.category_user.CategoryUserFragment
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeFragment

@@ -14,7 +14,6 @@ import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.login.LoginFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
 import com.haunp.mybookstore.presenters.fragment.orderDetail.OrderDetailFragment
-import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 

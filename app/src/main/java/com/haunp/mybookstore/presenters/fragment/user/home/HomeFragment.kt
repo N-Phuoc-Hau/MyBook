@@ -16,7 +16,7 @@ import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.login.LoginFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
-import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
+import com.haunp.mybookstore.presenters.fragment.user.book_detail.BookDetailFragment
 
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>() {

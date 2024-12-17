@@ -13,7 +13,6 @@ import com.haunp.mybookstore.domain.usecase.GetCartByUserIdUseCase
 import com.haunp.mybookstore.domain.usecase.UpdateCartUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CartViewModel(
     private val getCartByUserIdUseCase: GetCartByUserIdUseCase,
@@ -37,12 +36,12 @@ class CartViewModel(
 
     fun deleteBookInCart(bookId: Int, userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-                deleteBookInCart.invoke(bookId, userId)
-                Log.d("hau.np", "deleteBookInCart: $bookId")
-                val listBook = getBookInCartUserCase.invoke(userId)
-                Log.d("hau.np", "deleteBookInCart: $listBook")
-                _bookInCart.postValue(listBook)
-            }
+            deleteBookInCart.invoke(bookId, userId)
+            Log.d("hau.np", "deleteBookInCart: $bookId")
+            val listBook = getBookInCartUserCase.invoke(userId)
+            Log.d("hau.np", "deleteBookInCart: $listBook")
+            _bookInCart.postValue(listBook)
+        }
     }
 
     fun getBookInCart(userId: Int) {

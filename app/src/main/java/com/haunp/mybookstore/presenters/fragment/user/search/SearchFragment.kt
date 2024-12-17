@@ -10,7 +10,7 @@ import com.haunp.mybookstore.R
 import com.haunp.mybookstore.databinding.SearchFragmentBinding
 import com.haunp.mybookstore.domain.model.BookEntity
 import com.haunp.mybookstore.presenters.base.BaseFragment
-import com.haunp.mybookstore.presenters.fragment.user.BookDetailFragment
+import com.haunp.mybookstore.presenters.fragment.user.book_detail.BookDetailFragment
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeAdapter
 import org.koin.android.ext.android.inject
 

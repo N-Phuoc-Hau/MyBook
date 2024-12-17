@@ -1,4 +1,4 @@
-package com.haunp.mybookstore.presenters.fragment.user
+package com.haunp.mybookstore.presenters.fragment.user.book_detail
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
