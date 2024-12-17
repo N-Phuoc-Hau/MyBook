@@ -1,21 +1,26 @@
-binding.tvTitle.text = cartItem.bookId  // Hiển thị bookId, bạn có thể thay bằng tên sách
-            binding.tvQuantity.text = cartItem.quantity.toString()
-
-            // Xử lý giảm số lượng
-            binding.btnMinus.setOnClickListener {
-                if (cartItem.quantity > 1) {
-                    onItemClicked(cartItem.copy(quantity = cartItem.quantity - 1))
-                } else {
-                    onItemClicked(cartItem) // Nếu quantity = 1 thì xóa
-                }
-            }
-
-            // Xử lý tăng số lượng
-            binding.btnPlus.setOnClickListener {
-                onItemClicked(cartItem.copy(quantity = cartItem.quantity + 1))
-            }
-
-            // Xóa sản phẩm khỏi giỏ hàng
-            binding.btnRemove.setOnClickListener {
-                onItemClicked(cartItem) // Xóa sách khỏi giỏ khi nhấn nút "Xóa"
-            }
+//        lifecycleScope.launch {
+//            val userId = BookStoreManager.idUser
+//            val books = viewModel.bookInCart.value
+//            if(books!!.isEmpty()){
+//                Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show()
+//                return@launch
+//            }
+//            val totalAmount = books.sumOf { it.price }
+//            val order = OrderEntity(userId = userId!!, orderDate = LocalDate.now().toString(), quantity = books.size, totalAmount = totalAmount)
+//            val orderId = orderViewModel.insertOrder(order)
+//            orderViewModel.getOrder(userId)
+//
+//            val orderDetails: List<OrderDetailEntity> = books.map { book ->
+//                OrderDetailEntity(
+//                    orderId = orderId.toInt(), // ID của đơn hàng
+//                    bookId = book.bookId,      // ID của sách
+//                    quantity = 1,             // Số lượng mặc định là 1
+//                    price = book.price        // Giá sách
+//                )
+//            }.toList()
+//            orderViewModel.insertOrderDetails(orderDetails)
+//            Toast.makeText(context, "Đặt hàng thành công", Toast.LENGTH_SHORT).show()
+//
+//            viewModel.clearCart(userId)
+//            (activity as MainActivity).showFragment(SettingFragment())
+//        }

@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.koin.android)
+    //ThanhToan ZaloPay
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(files("libs/zpdk-release-v3.1.aar"))
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
