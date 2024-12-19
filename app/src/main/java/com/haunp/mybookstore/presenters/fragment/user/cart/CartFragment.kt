@@ -1,7 +1,7 @@
 package com.haunp.mybookstore.presenters.fragment.user.cart
 
+import android.os.Bundle
 import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -9,22 +9,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.R
-import com.haunp.mybookstore.data.api.CreateOrder
 import com.haunp.mybookstore.databinding.CartFragmentBinding
-import com.haunp.mybookstore.domain.constant.AppInfo.APP_ID
-import com.haunp.mybookstore.domain.model.BookEntity
 import com.haunp.mybookstore.domain.model.OrderDetailEntity
 import com.haunp.mybookstore.domain.model.OrderEntity
-import com.haunp.mybookstore.domain.repository.OnQuantityChangedListener
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
-import com.haunp.mybookstore.presenters.fragment.user.home.HomeAdapter
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import vn.zalopay.sdk.Environment
 import vn.zalopay.sdk.ZaloPayError
@@ -35,17 +28,23 @@ import java.time.LocalDate
 import java.util.Locale
 
 
-class CartFragment : BaseFragment<CartFragmentBinding>(){
-    private var paymentResult = MutableLiveData<String>("Đang đợi thanh toán")
-    private val totalString = MutableLiveData<String>("10000")
+class CartFragment : BaseFragment<CartFragmentBinding>() {
     private val viewModel: CartViewModel by inject()
-    private val orderViewModel : SettingViewModel by inject()
+    private val orderViewModel: SettingViewModel by inject()
+    private val paymentViewModel: PaymentViewModel by inject()
+    private var totalAmount: String = ""
     override var isTerminalBackKeyActive: Boolean = true
     override fun getDataBinding(): CartFragmentBinding {
         return CartFragmentBinding.inflate(layoutInflater)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.retainInstance = true
+    }
     override fun initView() {
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
         binding {
             val adapter = CartAdapter(viewModel)
             rVCart.adapter = adapter
@@ -60,6 +59,16 @@ class CartFragment : BaseFragment<CartFragmentBinding>(){
                 tvPrice.textSize = 18f
                 tvPrice.setTypeface(null, android.graphics.Typeface.BOLD)
             }
+            paymentViewModel.paymentResultLiveData.observe(viewLifecycleOwner){
+                Log.d("hau.np","paymentResultLiveData: $it")
+                if(it == "Thanh toán thành công"){
+                    taoOrder()
+                    Toast.makeText(context, "Thanh toán thành công", Toast.LENGTH_SHORT).show()
+                }
+                else if(it == "Hủy thanh toán"){
+                    Toast.makeText(context, "Thanh toán thất bại", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }
@@ -67,61 +76,97 @@ class CartFragment : BaseFragment<CartFragmentBinding>(){
     override fun initAction() {
         binding {
             btnThanhToan.setOnClickListener {
-                checkout()
+                if(isAdded && isResumed){
+                    val activity = requireActivity() as MainActivity
+                    thanhToan(activity)
+                }
+                else{
+                    Log.e("hau.np", "Fragment không ở trạng thái hoạt động.")
+                }
+
             }
         }
     }
-    private fun checkout() {
-        ZaloPaySDK.init(APP_ID, Environment.SANDBOX)
-        thanhToan()
-    }
 
-    private fun thanhToan() {
-        val orderApi = CreateOrder()
 
-        lifecycleScope.launch {
-            try {
-                if (totalString.value.isNullOrEmpty()) {
-                    Toast.makeText(context, "Tổng thanh toán không hợp lệ", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
-
-                val data = withContext(Dispatchers.IO) { orderApi.createOrder(totalString.toString()) }
-                Log.d("ZaloPay", "Order API response: $data")
-
+    private fun thanhToan(activity: MainActivity) {
+        ZaloPaySDK.init(2553, Environment.SANDBOX)
+        val totalString = "10000"
+        try {
+            lifecycleScope.launch {
+                val data = paymentViewModel.createOrder(totalString)
+                Log.d("hau.np","data: $data")
                 val code = data.getString("return_code")
+                Log.d("hau.np","return_code: $code")
                 if (code == "1") {
                     val token = data.getString("zp_trans_token")
+                    Log.d("hau.np","zp_trans_token: $token")
+                    val appTransID = data.getString("app_trans_id")
+                    Log.d("hau.np","app_trans_id: $appTransID")
                     ZaloPaySDK.getInstance().payOrder(
-                        requireActivity(),
+                        activity,
                         token,
                         "demozpdk://app",
                         object : PayOrderListener {
-                            override fun onPaymentSucceeded(payUrl: String?, transToken: String?, appTransID: String?) {
-                                paymentResult.value = "Thanh toán thành công"
-                                Log.d("ZaloPay", "Payment succeeded")
+                            override fun onPaymentSucceeded(
+                                payUrl: String?,
+                                transToken: String?,
+                                appTransID: String?
+                            ) {
+                                paymentViewModel.setPaymentResult("Thanh toán thành công")
+                                Log.d("hau.np","Thanh toan thanh cong")
                             }
 
                             override fun onPaymentCanceled(payUrl: String?, transToken: String?) {
-                                paymentResult.value = "Hủy thanh toán"
-                                Log.d("ZaloPay", "Payment canceled")
+                                paymentViewModel.setPaymentResult("Hủy thanh toán")
+                                Log.d("hau.np", "Payment canceled")
                             }
 
-                            override fun onPaymentError(error: ZaloPayError?, payUrl: String?, transToken: String?) {
-                                paymentResult.value = "Lỗi thanh toán"
-                                Log.e("ZaloPay", "Payment error: $error")
+                            override fun onPaymentError(
+                                error: ZaloPayError?,
+                                payUrl: String?,
+                                transToken: String?
+                            ) {
+                                paymentViewModel.setPaymentResult("Thanh toán thất bại")
+                                Log.e("hau.np", "Payment error: $error")
                             }
-                        }
-                    )
-                    paymentResult.value = "Đang chờ thanh toán..."
-                } else {
-                    Toast.makeText(context, "Không thể tạo đơn hàng", Toast.LENGTH_SHORT).show()
+                        })
+
                 }
-            } catch (e: Exception) {
-                paymentResult.value = "Lỗi: ${e.message}"
-                Log.e("ZaloPay", "Exception: ${e.message}")
+
             }
+        }catch (e: Exception)
+        {
+            e.printStackTrace()
+            Log.e("ZaloPayError", "Exception: ${e.message}")
         }
     }
+    private fun taoOrder(){
+        lifecycleScope.launch {
+            val userId = BookStoreManager.idUser
+            val books = viewModel.bookInCart.value
+            if(books!!.isEmpty()){
+                Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show()
+                return@launch
+            }
+            val totalAmount = books.sumOf { it.price }
+            val order = OrderEntity(userId = userId!!, orderDate = LocalDate.now().toString(), quantity = 1, totalAmount = totalAmount)
+            val orderId = orderViewModel.insertOrder(order)
+            orderViewModel.getOrder(userId)
 
+            val orderDetails: List<OrderDetailEntity> = books.map { book ->
+                OrderDetailEntity(
+                    orderId = orderId.toInt(), // ID của đơn hàng
+                    bookId = book.bookId,      // ID của sách
+                    quantity = 1,             // Số lượng mặc định là 1
+                    price = book.price        // Giá sách
+                )
+            }.toList()
+            orderViewModel.insertOrderDetails(orderDetails)
+            Toast.makeText(context, "Đặt hàng thành công", Toast.LENGTH_SHORT).show()
+
+            viewModel.clearCart(userId)
+            (activity as MainActivity).showFragment(SettingFragment())
+        }
+    }
 }

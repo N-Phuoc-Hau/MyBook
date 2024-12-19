@@ -19,6 +19,8 @@ class MyApplication : Application() {
         }
     }
 
+
+
     override fun onTerminate() {
         super.onTerminate()
         stopKoin()

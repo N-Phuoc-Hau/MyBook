@@ -24,3 +24,44 @@
 //            viewModel.clearCart(userId)
 //            (activity as MainActivity).showFragment(SettingFragment())
 //        }
+
+
+try {
+//
+//                val data = withContext(Dispatchers.IO) { orderApi.createOrder(totalString.toString()) }
+//                Log.d("ZaloPay", "Order API response: $data")
+//
+//                val code = data.getString("return_code")
+//                Log.d("ZaloPay", "Return code: $code")
+//
+//                if (code == "1") {
+//                    val token = data.getString("zp_trans_token")
+//                    ZaloPaySDK.getInstance().payOrder(
+//                        requireActivity(),
+//                        token,
+//                        "demozpdk://app",
+//                        object : PayOrderListener {
+//                            override fun onPaymentSucceeded(payUrl: String?, transToken: String?, appTransID: String?) {
+//                                paymentResult.value = "Thanh toán thành công"
+//                                Log.d("ZaloPay", "Payment succeeded")
+//                            }
+//
+//                            override fun onPaymentCanceled(payUrl: String?, transToken: String?) {
+//                                paymentResult.value = "Hủy thanh toán"
+//                                Log.d("ZaloPay", "Payment canceled")
+//                            }
+//
+//                            override fun onPaymentError(error: ZaloPayError?, payUrl: String?, transToken: String?) {
+//                                paymentResult.value = "Lỗi thanh toán"
+//                                Log.e("ZaloPay", "Payment error: $error")
+//                            }
+//                        }
+//                    )
+//                    paymentResult.value = "Đang chờ thanh toán..."
+//                } else {
+//                    Toast.makeText(context, "Không thể tạo đơn hàng", Toast.LENGTH_SHORT).show()
+//                }
+//            } catch (e: Exception) {
+//                paymentResult.value = "Lỗi: ${e.message}"
+//                Log.e("ZaloPay", "Exception: ${e.message}")
+//            }

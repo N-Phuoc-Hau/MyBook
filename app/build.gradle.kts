@@ -65,6 +65,7 @@ dependencies {
     //ThanhToan ZaloPay
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")
     implementation(files("libs/zpdk-release-v3.1.aar"))
+    implementation ("commons-codec:commons-codec:1.14")
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")

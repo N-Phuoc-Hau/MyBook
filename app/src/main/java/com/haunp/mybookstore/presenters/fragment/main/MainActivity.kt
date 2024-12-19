@@ -1,5 +1,6 @@
 package com.haunp.mybookstore.presenters.fragment.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
@@ -23,6 +24,7 @@ import com.haunp.mybookstore.presenters.fragment.user.category_user.CategoryUser
 import com.haunp.mybookstore.presenters.fragment.user.home.HomeFragment
 import com.haunp.mybookstore.presenters.fragment.user.search.SearchFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingFragment
+import vn.zalopay.sdk.ZaloPaySDK
 
 class MainActivity : AppCompatActivity() {
     private val coreViewModel: CoreViewModel by viewModels()
@@ -30,8 +32,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val policy = ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
         if (savedInstanceState == null) {
             showFragment(HomeFragment())
             coreViewModel.logout()

@@ -1,10 +1,14 @@
-package com.haunp.mybookstore.data.model
+package com.haunp.mybookstore.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.haunp.mybookstore.domain.constant.AppInfo
 import com.haunp.mybookstore.domain.helper.Helpers
 import java.util.Date
 
+@Entity
 data class ZaloPayOrder(
+    @PrimaryKey
     var appId: String = AppInfo.APP_ID.toString(),
     var appUser: String = "MyBookStore",
     var appTime: String = Date().time.toString(),
