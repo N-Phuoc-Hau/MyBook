@@ -20,15 +20,15 @@ class UserAdapter(private val viewModel: UserViewModel, private val updateUser: 
         fun bind(user: UserEntity) {
             binding.tvName.text = user.username
             binding.tvEmail.text = user.email
-            if (user.role == 1) {
+            if (user.role == 0) {
                 binding.tvRole.text = "Admin"
             } else {
                 binding.tvRole.text = "User"
             }
-            binding.ftbDel.setOnClickListener {
+            binding.imgDelete.setOnClickListener {
                 viewModel.delUser(user.userId)
             }
-            binding.ftbUpdate.setOnClickListener {
+            binding.imgUpdate.setOnClickListener {
                 updateUser(user.userId)
             }
             }

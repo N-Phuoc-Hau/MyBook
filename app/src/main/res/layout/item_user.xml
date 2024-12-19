@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="100dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:id="@+id/ftbDel"
-        android:src="@drawable/ic_cancel"
-        app:backgroundTint="@color/white"
-        app:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="@id/llItem"
-        app:layout_constraintTop_toTopOf="@id/llItem"
-        app:layout_constraintRight_toRightOf="@id/llItem"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/ftbUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_update"
-        app:backgroundTint="@color/white"
-        app:elevation="0dp"
-        app:layout_constraintEnd_toEndOf="@id/llItem"
-        app:layout_constraintTop_toBottomOf="@id/ftbDel"
-        app:layout_constraintRight_toRightOf="@id/llItem"/>
     <LinearLayout
         android:id="@+id/llItem"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/imgDelete"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_cancel" />
+            <ImageButton
+                android:layout_width="100dp"
+                android:id="@+id/imgUpdate"
+                android:src="@drawable/ic_update"
+                android:layout_height="40dp"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:src="@drawable/userphoto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llItem" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="Nguyen Ly Ke Toan" />
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="Nguyen Ly Ke Toan" />
         <TextView
             android:id="@+id/tvRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="Nguyen Ly Ke Toan" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

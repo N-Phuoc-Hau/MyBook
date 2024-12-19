@@ -8,6 +8,7 @@ import com.haunp.mybookstore.domain.model.OrderEntity
 
 class StatisticalAdapter() : RecyclerView.Adapter<StatisticalAdapter.StatisticalViewHolder>() {
     private val orders = mutableListOf<Pair<OrderEntity, String>>() // Danh sách dữ liệu hiển thị
+    var onItemClick : (OrderEntity) -> Unit = {}
     fun submitList(newOrders: List<Pair<OrderEntity, String>>) {
         orders.clear()
         orders.addAll(newOrders)
@@ -18,9 +19,11 @@ class StatisticalAdapter() : RecyclerView.Adapter<StatisticalAdapter.Statistical
         fun bind(orderWithUser: Pair<OrderEntity, String>) {
             val (order, username) = orderWithUser
             binding.tvNameUser.text = username
-            binding.tvNameUser.text = username.toString()
             binding.tvPrice.text = order.totalAmount.toString()
-            binding.tvDate.text = order.orderDate.toString()
+            binding.tvDate.text = order.orderDate
+            binding.root.setOnClickListener{
+                onItemClick(order)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatisticalViewHolder {

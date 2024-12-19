@@ -1,6 +1,7 @@
 package com.haunp.mybookstore.presenters.fragment.admin.user
 
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.haunp.mybookstore.databinding.UserFragmentBinding
 import com.haunp.mybookstore.domain.model.UserEntity
@@ -19,7 +20,7 @@ class UserFragment : BaseFragment<UserFragmentBinding>(){
             binding.edtID.setText(it.toString())
         }
         binding.userRecyclerView.adapter = adapter
-        binding.userRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.userRecyclerView.layoutManager = GridLayoutManager(context,2)
         viewModel.users.observe(viewLifecycleOwner) { userList ->
             adapter.submitList(userList)
         }

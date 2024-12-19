@@ -66,7 +66,7 @@
             android:id="@+id/edtCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID Danh mục sách" />
+            android:hint="ITên danh mục" />
 
         <Button
             android:id="@+id/btnSelectBook"

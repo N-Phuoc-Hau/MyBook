@@ -82,14 +82,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
     override fun initAction() {
         binding {
             btnThanhToan.setOnClickListener {
-//                if(isAdded && isResumed){
-//                    val activity = requireActivity() as MainActivity
-//                    thanhToan(activity)
-//
-//                }
-//                else{
-//                    Log.e("hau.np", "Fragment không ở trạng thái hoạt động.")
-//                }
+//                thanhToan()
                 taoOrder()
 
             }
@@ -97,7 +90,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
     }
 
 
-    private fun thanhToan(activity: MainActivity) {
+    private fun thanhToan() {
         ZaloPaySDK.init(2553, Environment.SANDBOX)
         val totalString = "10000"
         try {
@@ -110,7 +103,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                     val token = data.getString("zp_trans_token")
                     Log.d("hau.np","zp_trans_token: $token")
                     ZaloPaySDK.getInstance().payOrder(
-                        activity,
+                        requireActivity(),
                         token,
                         "demozpdk://app",
                         object : PayOrderListener {
@@ -120,6 +113,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                                 appTransID: String?
                             ) {
                                 paymentViewModel.setPaymentResult("Thanh toán thành công")
+                                taoOrder()
                                 Log.d("hau.np","Thanh toan thanh cong")
                             }
 
@@ -168,6 +162,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                     price = book.price        // Giá sách
                 )
             }.toList()
+            Log.d("hau.np", orderDetails.toString())
             orderViewModel.insertOrderDetails(orderDetails)
             Toast.makeText(context, "Đặt hàng thành công", Toast.LENGTH_SHORT).show()
 

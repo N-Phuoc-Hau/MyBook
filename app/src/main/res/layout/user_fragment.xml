@@ -30,7 +30,7 @@
             android:id="@+id/edt_ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID User (Khi xóa hoặc sửa)" />
+            android:hint="ID User (Khi sửa, chỉ set admin khi đã tạo user)" />
 
         <EditText
             android:id="@+id/edt_Name"
@@ -66,7 +66,7 @@
             android:id="@+id/edt_role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Role User (1: Admin, 0: User)" />
+            android:hint="Role User (0: Admin, 1: User)" />
     </LinearLayout>
 
     <LinearLayout
