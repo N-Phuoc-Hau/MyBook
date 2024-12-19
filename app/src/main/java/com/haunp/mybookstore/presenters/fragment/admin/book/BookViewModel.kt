@@ -31,6 +31,7 @@ class BookViewModel(private val getListBookUseCase: GetListBookUseCase,
         viewModelScope.launch {
             getCateUseCase().collect { categoriesList ->
                 _categories.postValue(categoriesList)
+                Log.d("hau.np", "Categories: $categoriesList")
             }
         }
     }
@@ -52,8 +53,13 @@ class BookViewModel(private val getListBookUseCase: GetListBookUseCase,
             updateBookUseCase.invoke(book)
         }
     }
-    fun isCategoryExist(categoryId: Int): Boolean {
-        val categoryIds = books.value?.map { it.categoryId }
-        return categoryIds?.contains(categoryId) ?: false
+    fun isCategoryExist(cateName: String): Boolean {
+        val categoryIds = categories.value?.map { it.name }
+        Log.d("hau.np", "Category IDs: $categoryIds")
+        return categoryIds?.contains(cateName) ?: false
+    }
+    fun getCateID(cateName: String): Int? {
+        val category = categories.value?.find { it.name == cateName }
+        return category?.categoryId
     }
 }

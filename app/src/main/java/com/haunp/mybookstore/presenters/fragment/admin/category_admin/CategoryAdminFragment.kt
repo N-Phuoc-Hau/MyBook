@@ -23,7 +23,9 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
     }
 
     override fun initView() {
-        val adapter = CategoryAdapter()
+        val adapter = CategoryAdapter(viewModel){
+            binding.edtIDCate.setText(it.toString())
+        }
         binding.categoryAdminRecyclerView.adapter = adapter
         binding.categoryAdminRecyclerView.layoutManager = GridLayoutManager(context, 2)
 
@@ -50,25 +52,6 @@ class CategoryAdminFragment : BaseFragment<CategoryAdminFragmentBinding>() {
                 } else {
                     Toast.makeText(context, "Vui lòng nhập tên danh mục!", Toast.LENGTH_SHORT).show()
                 }
-            }
-            btnDel.setOnClickListener {
-                val id = edtIDCate.text.toString().trim()
-                if (id.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập ID danh mục", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                val categoryId = id.toInt()
-                val categories = viewModel.categories.value ?: emptyList()
-                for (cate in categories) {
-                    if (cate.categoryId == id.toInt()) {
-                        viewModel.deleteCategory(id.toInt())
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show()
-                        clearText()
-                        return@setOnClickListener
-                    }
-                }
-                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
-                clearText()
             }
             btnUpdate.setOnClickListener {
                 val id = edtIDCate.text.toString().trim()

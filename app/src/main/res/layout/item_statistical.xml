@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_chart"/>
+        android:src="@drawable/ic_cart_user" />
+
     <LinearLayout
-        android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -21,7 +22,9 @@
 
         <TextView
             android:id="@+id/tvNameUser"
+            android:layout_marginTop="10dp"
             android:textSize="15dp"
+            android:text="Name User"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -31,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/red"
-            android:text="1200000"
+            android:text="Price"
             android:textSize="15dp"/>
         <TextView
             android:id="@+id/tvDate"

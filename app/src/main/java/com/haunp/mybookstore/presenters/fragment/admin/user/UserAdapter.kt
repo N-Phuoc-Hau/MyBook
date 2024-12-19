@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.haunp.mybookstore.databinding.ItemUserBinding
 import com.haunp.mybookstore.domain.model.UserEntity
 
-class UserAdapter :RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
+class UserAdapter(private val viewModel: UserViewModel, private val updateUser: (userId: Int) -> Unit) :RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
     private val users = mutableListOf<UserEntity>()
 
     fun submitList(newUsers: List<UserEntity>){
@@ -18,7 +18,6 @@ class UserAdapter :RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
     inner class UserViewHolder(private val binding: ItemUserBinding) :
     RecyclerView.ViewHolder(binding.root){
         fun bind(user: UserEntity) {
-            binding.tvId.text = user.userId.toString()
             binding.tvName.text = user.username
             binding.tvEmail.text = user.email
             if (user.role == 1) {
@@ -26,7 +25,13 @@ class UserAdapter :RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
             } else {
                 binding.tvRole.text = "User"
             }
-        }
+            binding.ftbDel.setOnClickListener {
+                viewModel.delUser(user.userId)
+            }
+            binding.ftbUpdate.setOnClickListener {
+                updateUser(user.userId)
+            }
+            }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = ItemUserBinding.inflate(

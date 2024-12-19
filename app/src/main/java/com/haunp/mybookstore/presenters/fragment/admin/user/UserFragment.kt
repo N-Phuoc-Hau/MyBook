@@ -15,7 +15,9 @@ class UserFragment : BaseFragment<UserFragmentBinding>(){
         return UserFragmentBinding.inflate(layoutInflater)
     }
     override fun initView() {
-        val adapter = UserAdapter()
+        val adapter = UserAdapter(viewModel){
+            binding.edtID.setText(it.toString())
+        }
         binding.userRecyclerView.adapter = adapter
         binding.userRecyclerView.layoutManager = LinearLayoutManager(context)
         viewModel.users.observe(viewLifecycleOwner) { userList ->
@@ -40,20 +42,6 @@ class UserFragment : BaseFragment<UserFragmentBinding>(){
                     role = role.toInt()
                 )
                 viewModel.registerUser(userEntity)
-                clearText()
-            }
-            btnDel.setOnClickListener{
-                val id = edtID.text.toString().trim()
-                val users = viewModel.users.value ?: emptyList()
-                for (user in users) {
-                    if (user.userId == id.toInt()) {
-                        viewModel.delUser(id.toInt())
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show()
-                        clearText()
-                        return@setOnClickListener
-                    }
-                }
-                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
                 clearText()
             }
             btnUpdate.setOnClickListener{

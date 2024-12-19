@@ -15,6 +15,7 @@ import com.haunp.mybookstore.domain.model.OrderEntity
 import com.haunp.mybookstore.presenters.BookStoreManager
 import com.haunp.mybookstore.presenters.base.BaseFragment
 import com.haunp.mybookstore.presenters.fragment.main.MainActivity
+import com.haunp.mybookstore.presenters.fragment.user.home.HomeFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingFragment
 import com.haunp.mybookstore.presenters.fragment.user.setting.SettingViewModel
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ import vn.zalopay.sdk.listeners.PayOrderListener
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.Locale
+import java.util.logging.Handler
 
 
 class CartFragment : BaseFragment<CartFragmentBinding>() {
@@ -40,7 +42,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.retainInstance = true
+        setRetainInstance(true)
     }
     override fun initView() {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -59,6 +61,9 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                 tvPrice.textSize = 18f
                 tvPrice.setTypeface(null, android.graphics.Typeface.BOLD)
             }
+            icCancel.setOnClickListener{
+                (activity as MainActivity).showFragment(HomeFragment())
+            }
             paymentViewModel.paymentResultLiveData.observe(viewLifecycleOwner){
                 Log.d("hau.np","paymentResultLiveData: $it")
                 if(it == "Thanh toán thành công"){
@@ -69,6 +74,7 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                     Toast.makeText(context, "Thanh toán thất bại", Toast.LENGTH_SHORT).show()
                 }
             }
+
         }
 
     }
@@ -76,13 +82,15 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
     override fun initAction() {
         binding {
             btnThanhToan.setOnClickListener {
-                if(isAdded && isResumed){
-                    val activity = requireActivity() as MainActivity
-                    thanhToan(activity)
-                }
-                else{
-                    Log.e("hau.np", "Fragment không ở trạng thái hoạt động.")
-                }
+//                if(isAdded && isResumed){
+//                    val activity = requireActivity() as MainActivity
+//                    thanhToan(activity)
+//
+//                }
+//                else{
+//                    Log.e("hau.np", "Fragment không ở trạng thái hoạt động.")
+//                }
+                taoOrder()
 
             }
         }
@@ -101,8 +109,6 @@ class CartFragment : BaseFragment<CartFragmentBinding>() {
                 if (code == "1") {
                     val token = data.getString("zp_trans_token")
                     Log.d("hau.np","zp_trans_token: $token")
-                    val appTransID = data.getString("app_trans_id")
-                    Log.d("hau.np","app_trans_id: $appTransID")
                     ZaloPaySDK.getInstance().payOrder(
                         activity,
                         token,

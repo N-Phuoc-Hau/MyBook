@@ -10,7 +10,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 
-class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter(private val viewModel: BookViewModel, private val updateBook: (categoryId: Int) -> Unit) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
     private val books = mutableListOf<BookEntity>() // Danh sách dữ liệu hiển thị
 
     fun submitList(newBooks: List<BookEntity>){
@@ -21,8 +21,7 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
     inner class BookViewHolder(private val binding: ItemBookAdminBinding) :
             RecyclerView.ViewHolder(binding.root) {
                 fun bind(book: BookEntity) {
-                    binding.tvId.text = book.bookId.toString()
-                    binding.tvTittle.text = book.title
+                    binding.tvTitle.text = book.title
                     binding.tvAuthor.text = book.author
                     binding.tvQuantity.text = book.quantity.toString()
                     val formattedPrice = NumberFormat.getNumberInstance(Locale("vi", "VN"))
@@ -31,6 +30,12 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
                     Glide.with(binding.root.context)
                         .load(book.imageUri)
                         .into(binding.imgSelectedBook)
+                    binding.imgDelete.setOnClickListener(){
+                        viewModel.deleteBook(book.bookId)
+                    }
+                    binding.imgUpdate.setOnClickListener(){
+                        updateBook(book.bookId)
+                    }
                 }
     }
 

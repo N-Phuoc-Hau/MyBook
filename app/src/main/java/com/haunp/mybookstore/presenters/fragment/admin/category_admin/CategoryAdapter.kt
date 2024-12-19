@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.haunp.mybookstore.databinding.ItemCategoryAdminBinding
 import com.haunp.mybookstore.databinding.ItemCategoryBinding
 import com.haunp.mybookstore.domain.model.CategoryEntity
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(private val viewModel: CategoryAdminViewModel,
+                      private val onCategoryClick: (categoryId: Int) -> Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private val categories = mutableListOf<CategoryEntity>() // Danh sách dữ liệu hiển thị
 
@@ -19,7 +21,7 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
     }
 
     // ViewHolder cho từng item danh mục
-    inner class CategoryViewHolder(private val binding: ItemCategoryBinding) :
+    inner class CategoryViewHolder(private val binding: ItemCategoryAdminBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(category: CategoryEntity) {
@@ -27,11 +29,17 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             Glide.with(binding.root.context)
                 .load(category.imageUri) // Load ảnh từ URI
                 .into(binding.ivCategoryImage) // ImageView hiển thị ảnh
+            binding.imgDelete.setOnClickListener {
+                viewModel.deleteCategory(category.categoryId)
+            }
+            binding.imgUpdate.setOnClickListener {
+                onCategoryClick(category.categoryId)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val binding = ItemCategoryBinding.inflate(
+        val binding = ItemCategoryAdminBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

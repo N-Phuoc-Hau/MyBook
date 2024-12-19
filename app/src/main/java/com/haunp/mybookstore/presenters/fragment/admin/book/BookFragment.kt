@@ -23,7 +23,9 @@ class BookFragment : BaseFragment<BookFragmentBinding>() {
         return BookFragmentBinding.inflate(layoutInflater)
     }
     override fun initView() {
-        val adapter = BookAdapter()
+        val adapter = BookAdapter(viewModel){
+            binding.edtIdBook.setText(it.toString())
+        }
         binding.bookAdminRecyclerView.adapter = adapter
         binding.bookAdminRecyclerView.layoutManager = GridLayoutManager(context, 2)
         viewModel.books.observe(viewLifecycleOwner) { bookList ->
@@ -49,40 +51,23 @@ class BookFragment : BaseFragment<BookFragmentBinding>() {
                     Toast.makeText(context, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                val categoryId = category.toIntOrNull()
-//                if (categoryId == null || !viewModel.isCategoryExist(categoryId)) {
-//                    Toast.makeText(context, "Danh mục không tồn tại", Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
+
+                if (!viewModel.isCategoryExist(category)) {
+                    Toast.makeText(context, "Danh mục không tồn tại", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 val bookEntity = BookEntity(
                     title = title,
                     author = author,
                     price = price.toDouble(),
                     quantity = quantity.toInt(),
-                    categoryId = category.toInt(), // Cần làm hàm check có tồn tại không
+                    categoryId = viewModel.getCateID(category)!!, // Cần làm hàm check có tồn tại không
                     description = description,
                     imageUri = imageUriString
                 )
 
                 viewModel.addBook(bookEntity)
                 clearText()
-            }
-            btnDel.setOnClickListener {
-                val id = edtIdBook.text.toString()
-                if (id.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập ID sách", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                val books = viewModel.books.value ?: emptyList()
-                for (book in books) {
-                    if (book.bookId == id.toInt()) {
-                        viewModel.deleteBook(book.bookId)
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show()
-                        clearText()
-                        return@setOnClickListener
-                    }
-                }
-                Toast.makeText(context, "Không tìm thấy sách với ID này", Toast.LENGTH_SHORT).show()
             }
             btnUpdate.setOnClickListener {
                 val id = edtIdBook.text.toString()
@@ -97,13 +82,17 @@ class BookFragment : BaseFragment<BookFragmentBinding>() {
                     Toast.makeText(context, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
+                if (!viewModel.isCategoryExist(category)) {
+                    Toast.makeText(context, "Danh mục không tồn tại", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 val bookEntity = BookEntity(
                     bookId = id.toInt(),
                     title = title,
                     author = author,
                     price = price.toDouble(),
                     quantity = quantity.toInt(),
-                    categoryId = category.toInt(), // Cần làm hàm check có tồn tại không
+                    categoryId = viewModel.getCateID(category)!!, // Cần làm hàm check có tồn tại không
                     description = description,
                     imageUri = imageUriString
                 )

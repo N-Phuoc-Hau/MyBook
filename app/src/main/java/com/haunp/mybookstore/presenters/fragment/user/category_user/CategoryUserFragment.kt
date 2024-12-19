@@ -25,7 +25,6 @@ class CategoryUserFragment : BaseFragment<CategoryUserFragmentBinding>() {
     override fun initView() {
         binding.categoryRecyclerView.adapter = adapter
         binding.categoryRecyclerView.layoutManager = GridLayoutManager(context,2)
-
         // Lắng nghe LiveData và cập nhật RecyclerView
         val categoryList = getCategoriesFromSharedPreferences()
         adapter.submitList(categoryList)

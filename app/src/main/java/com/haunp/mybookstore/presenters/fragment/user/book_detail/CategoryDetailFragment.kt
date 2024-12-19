@@ -21,6 +21,7 @@ class CategoryDetailFragment:BaseFragment<CategoryDetailFragmentBinding>() {
         binding{
             recCategory.layoutManager = GridLayoutManager(context,2)
             recCategory.adapter = homeAdapter
+            textViewDetailCate.text = arguments?.getString("categoryName")
         }
         val categoryId = arguments?.getInt("categoryId")?: 0
         viewModel.getBookByCateID(categoryId)

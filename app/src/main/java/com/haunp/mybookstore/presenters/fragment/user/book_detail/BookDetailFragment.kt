@@ -1,5 +1,7 @@
 package com.haunp.mybookstore.presenters.fragment.user.book_detail
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -39,9 +41,10 @@ class BookDetailFragment : BaseFragment<BookDetailFragmentBinding>() {
                 priceBook.text = "$formattedPrice đ"
                 authorBook.text = it.author
                 descriptionBook.text = it.description
-                Glide.with(requireContext())
-                    .load(it.imageUri) // Nếu imageUri là URL hoặc đường dẫn tệp
-                    .into(imgBook)
+                Glide.with(binding.root.context)
+                    .load(it.imageUri)
+                    .into(binding.imgBook)
+                Log.d("TAG", "initView: ${it.imageUri}")
             }
             rvRate.adapter = adapter
             rvRate.layoutManager = LinearLayoutManager(context)
